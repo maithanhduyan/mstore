@@ -1,0 +1,2 @@
+-- CREATE DATABASE 'mstore';
+-- DROP DATABASE mstore;
