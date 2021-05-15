@@ -1,8 +1,8 @@
-package com.mstore.services;
+package com.mstore.services.product;
 
 import org.springframework.stereotype.Service;
 
-import entities.Product;
+import com.mstore.entities.Product;
 
 @Service
 public interface ProductService {
