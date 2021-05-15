@@ -1,5 +1,8 @@
-// Custom Stylesheet
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap.scss";
+@import "styles.scss";
 
+// Theme Style
 #header {
     position: relative;
     z-index: 15;

@@ -6,10 +6,10 @@ const sh = require('shelljs');
 
 module.exports = function renderScripts() {
 
-    const sourcePath = upath.resolve(upath.dirname(__filename), '../js');
-    const destPath = upath.resolve(upath.dirname(__filename), '../public/js/.');
+    //const sourcePath = upath.resolve(upath.dirname(__filename), '../js');
+    //const destPath = upath.resolve(upath.dirname(__filename), '../public/js/.');
     
-    sh.cp('-R', sourcePath, destPath)
+    //sh.cp('-R', sourcePath, destPath)
 
     const sourcePathScriptsJS = upath.resolve(upath.dirname(__filename), '../js/app.js');
     const destPathScriptsJS = upath.resolve(upath.dirname(__filename), '../public/js/app.js');

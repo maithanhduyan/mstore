@@ -4,3 +4,4 @@
 * Licensed under MIT (https://github.com/maithanhduyan/m-store/blob/master/LICENSE)
 */
 // author: Mai Thành Duy An
+//alert("mix");
