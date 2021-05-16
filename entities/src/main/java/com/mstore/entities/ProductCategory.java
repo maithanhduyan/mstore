@@ -13,13 +13,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
-
 @Entity
-@Table(name = "PRODUCT")
-public class Product implements Serializable {
+@Table(name = "PRODUCTCATEGORY")
+public class ProductCategory implements Serializable {
 
-	private static final long serialVersionUID = -2629599562342979524L;
+	private static final long serialVersionUID = -3276434914260910835L;
+
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	private String id;
@@ -30,17 +29,11 @@ public class Product implements Serializable {
 	@Column(name = "CODE")
 	private String code;
 
-	@Column(name = "COST_PRICE")
-	private int costPrice;
-
-	@Column(name = "SALE_PRICE")
-	private int salePrice;
+	@Column(name = "DESCRIPTION")
+	private String description;
 
 	@Column(name = "ACTIVE")
 	private int active;
-
-	@Column(name = "IN_STOCK")
-	private int inStock;
 
 	@Column(name = "CREATED_BY")
 	private String createdBy;
@@ -55,9 +48,6 @@ public class Product implements Serializable {
 	@Column(name = "UPDATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
-
-	public Product() {
-	}
 
 	public String getId() {
 		return id;
@@ -83,20 +73,12 @@ public class Product implements Serializable {
 		this.code = code;
 	}
 
-	public int getCostPrice() {
-		return costPrice;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setCostPrice(int costPrice) {
-		this.costPrice = costPrice;
-	}
-
-	public int getSalePrice() {
-		return salePrice;
-	}
-
-	public void setSalePrice(int salePrice) {
-		this.salePrice = salePrice;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getActive() {
@@ -105,14 +87,6 @@ public class Product implements Serializable {
 
 	public void setActive(int active) {
 		this.active = active;
-	}
-
-	public int getInStock() {
-		return inStock;
-	}
-
-	public void setInStock(int inStock) {
-		this.inStock = inStock;
 	}
 
 	public String getCreatedBy() {
@@ -149,9 +123,10 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", costPrice=" + costPrice + ", salePrice="
-				+ salePrice + ", active=" + active + ", inStock=" + inStock + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+		return "ProductCategory [id=" + id + ", name=" + name + ", code=" + code + ", description=" + description
+				+ ", active=" + active + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", createdDate="
+				+ createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
+	
 }

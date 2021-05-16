@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import com.mstore.services.ProductService;
 
 @Controller
 public class MainController {
+	Logger log = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -106,6 +109,7 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping("/addProduct")
 	public String addProduct() {
+		Long start = System.currentTimeMillis();
 		String id = UUID.randomUUID().toString();
 		Product product = new Product();
 		product.setId(id);
@@ -114,21 +118,23 @@ public class MainController {
 		product.setActive(1);
 		product.setCreatedDate(new Date());
 		this.productRepository.save(product);
-
+		Long duration = System.currentTimeMillis() - start;
+		log.info("Take: " + duration + "ms");
 		return "Inserted: " + this.productRepository.findById(id);
 	}
 
 	@ResponseBody
 	@RequestMapping("/showAllProduct")
 	public String showAllProduct() {
-
+		Long start = System.currentTimeMillis();
 		Iterable<Product> product = this.productRepository.findAll();
 
 		String html = "";
 		for (Product p : product) {
 			html += p + "<br>";
 		}
-
-		return html;
+		Long duration = System.currentTimeMillis() - start;
+		log.info("Take: " + duration + "ms");
+		return "Take:"+duration+" ms <br>"+html;
 	}
 }
