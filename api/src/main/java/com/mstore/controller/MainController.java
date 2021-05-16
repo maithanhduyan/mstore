@@ -14,6 +14,7 @@ import com.mstore.entities.Employee;
 import com.mstore.entities.Product;
 import com.mstore.repositories.EmployeeRepository;
 import com.mstore.repositories.ProductRepository;
+import com.mstore.services.ProductService;
 
 @Controller
 public class MainController {
@@ -23,6 +24,9 @@ public class MainController {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private ProductService productService;
 
 	private static final String[] NAMES = new String[] { "Tom", "Jerry", "Donald" };
 
@@ -102,16 +106,16 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping("/addProduct")
 	public String addProduct() {
-
 		String id = UUID.randomUUID().toString();
-
 		Product product = new Product();
 		product.setId(id);
 		int code = new Random().nextInt(200000);
 		product.setCode("C" + code);
+		product.setActive(1);
+		product.setCreatedDate(new Date());
 		this.productRepository.save(product);
 
-		return "Inserted: " + product;
+		return "Inserted: " + this.productRepository.findById(id);
 	}
 
 	@ResponseBody

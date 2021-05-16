@@ -1,10 +1,8 @@
-package com.mstore.services.product;
-
-import org.springframework.stereotype.Service;
+package com.mstore.services;
 
 import com.mstore.entities.Product;
 
-@Service
 public interface ProductService {
 	public Product fetchOne(String id) ;
+	public Long count();
 }
