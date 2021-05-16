@@ -31,10 +31,19 @@ public class Product implements Serializable {
 	private String code;
 
 	@Column(name = "COST_PRICE")
-	private int costPrice;
+	private double costPrice;
 
 	@Column(name = "SALE_PRICE")
-	private int salePrice;
+	private double salePrice;
+	
+	@Column(name = "DESCRIPTION")
+	private String description;
+	
+	@Column(name = "LINK_URL")
+	private String linkURL;
+	
+	@Column(name = "IMAGE_URL")
+	private String imageURL;
 
 	@Column(name = "ACTIVE")
 	private int active;
@@ -83,7 +92,7 @@ public class Product implements Serializable {
 		this.code = code;
 	}
 
-	public int getCostPrice() {
+	public double getCostPrice() {
 		return costPrice;
 	}
 
@@ -91,7 +100,7 @@ public class Product implements Serializable {
 		this.costPrice = costPrice;
 	}
 
-	public int getSalePrice() {
+	public double getSalePrice() {
 		return salePrice;
 	}
 
@@ -147,11 +156,36 @@ public class Product implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLinkURL() {
+		return linkURL;
+	}
+
+	public void setLinkURL(String linkURL) {
+		this.linkURL = linkURL;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", costPrice=" + costPrice + ", salePrice="
-				+ salePrice + ", active=" + active + ", inStock=" + inStock + ", createdBy=" + createdBy
-				+ ", updatedBy=" + updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+				+ salePrice + ", description=" + description + ", linkURL=" + linkURL + ", imageURL=" + imageURL
+				+ ", active=" + active + ", inStock=" + inStock + ", createdBy=" + createdBy + ", updatedBy="
+				+ updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
 }

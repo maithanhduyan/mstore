@@ -24,7 +24,7 @@ public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = -8523791895059129675L;
 
 	@Id
-	@Column(name = "ID", length = 50, nullable = false)
+	@Column(name = "ID", nullable = false)
 	private String id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
