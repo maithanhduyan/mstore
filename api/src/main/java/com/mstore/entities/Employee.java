@@ -1,4 +1,4 @@
-package com.mstore.api.entity;
+package com.mstore.entities;
 
 import java.util.Date;
 

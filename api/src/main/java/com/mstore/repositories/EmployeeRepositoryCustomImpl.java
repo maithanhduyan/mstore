@@ -1,4 +1,4 @@
-package com.mstore.api.repository;
+package com.mstore.repositories;
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mstore.api.entity.Employee;
+import com.mstore.entities.Employee;
 
 @Repository
 public class EmployeeRepositoryCustomImpl implements EmployeeRepositoryCustom {

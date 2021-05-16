@@ -1,4 +1,4 @@
-package com.mstore.api.repository;
+package com.mstore.repositories;
 
 import java.util.Date;
 
