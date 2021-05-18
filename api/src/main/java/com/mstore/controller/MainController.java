@@ -8,8 +8,10 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mstore.entities.Employee;
@@ -20,7 +22,8 @@ import com.mstore.services.ProductService;
 
 @Controller
 public class MainController {
-	Logger log = LoggerFactory.getLogger(MainController.class);
+
+	static final Logger LOG = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -38,20 +41,22 @@ public class MainController {
 	public String home() {
 		String html = "";
 		html += "<ul>";
-		html += " <li><a href='/testInsert'>Test Insert</a></li>";
-		html += " <li><a href='/showAllEmployee'>Show All Employee</a></li>";
-		html += " <li><a href='/showFullNameLikeTom'>Show All 'Tom'</a></li>";
-		html += " <li><a href='/deleteAllEmployee'>Delete All Employee</a></li>";
-		html += " <li><a href='/addProduct'>Add Product</a></li>";
-		html += " <li><a href='/showAllProduct'>Show All Product</a></li>";
+		html += " <li><a href='/test/InsertEmployee'>Test Insert</a></li>";
+		html += " <li><a href='/test/showAllEmployee'>Show All Employee</a></li>";
+		html += " <li><a href='/test/showFullNameLikeTom'>Show All 'Tom'</a></li>";
+		html += " <li><a href='/test/deleteAllEmployee'>Delete All Employee</a></li>";
+		html += " <li><a href='/test/addProduct'>Add Product</a></li>";
+		html += " <li><a href='/test/showAllProduct'>Show All Product</a></li>";
+		html += " <li><a href='/test/showAllProduct.json'>Show All Product JSON</a></li>";
 		html += "</ul>";
 		return html;
 	}
 
 	@ResponseBody
-	@RequestMapping("/testInsert")
+	@RequestMapping("/test/InsertEmployee")
 	public String testInsert() {
 
+		Long start = System.currentTimeMillis();
 		Long empIdMax = this.employeeRepository.getMaxId();
 
 		Employee employee = new Employee();
@@ -67,47 +72,57 @@ public class MainController {
 		employee.setHireDate(new Date());
 		this.employeeRepository.save(employee);
 
+		LOG.debug(employee.toString());
+
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
 		return "Inserted: " + employee;
 	}
 
 	@ResponseBody
-	@RequestMapping("/showAllEmployee")
+	@RequestMapping("/test/showAllEmployee")
 	public String showAllEmployee() {
 
+		Long start = System.currentTimeMillis();
 		Iterable<Employee> employees = this.employeeRepository.findAll();
 
 		String html = "";
 		for (Employee emp : employees) {
 			html += emp + "<br>";
 		}
-
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
 		return html;
 	}
 
 	@ResponseBody
-	@RequestMapping("/showFullNameLikeTom")
+	@RequestMapping("/test/showFullNameLikeTom")
 	public String showFullNameLikeTom() {
 
+		Long start = System.currentTimeMillis();
 		List<Employee> employees = this.employeeRepository.findByFullNameLike("Tom");
 
 		String html = "";
 		for (Employee emp : employees) {
 			html += emp + "<br>";
 		}
-
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
 		return html;
 	}
 
 	@ResponseBody
-	@RequestMapping("/deleteAllEmployee")
+	@RequestMapping("/test/deleteAllEmployee")
 	public String deleteAllEmployee() {
-
+		Long start = System.currentTimeMillis();
 		this.employeeRepository.deleteAll();
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
 		return "Deleted!";
 	}
 
 	@ResponseBody
-	@RequestMapping("/addProduct")
+	@RequestMapping("/test/addProduct")
 	public String addProduct() {
 		Long start = System.currentTimeMillis();
 		String id = UUID.randomUUID().toString();
@@ -119,12 +134,12 @@ public class MainController {
 		product.setCreatedDate(new Date());
 		this.productRepository.save(product);
 		Long duration = System.currentTimeMillis() - start;
-		log.info("Take: " + duration + "ms");
+		LOG.debug("Take: " + duration + "ms");
 		return "Inserted: " + this.productRepository.findById(id);
 	}
 
 	@ResponseBody
-	@RequestMapping("/showAllProduct")
+	@RequestMapping("/test/showAllProduct")
 	public String showAllProduct() {
 		Long start = System.currentTimeMillis();
 		Iterable<Product> product = this.productRepository.findAll();
@@ -134,7 +149,20 @@ public class MainController {
 			html += p + "<br>";
 		}
 		Long duration = System.currentTimeMillis() - start;
-		log.info("Take: " + duration + "ms");
-		return "Take:"+duration+" ms <br>"+html;
+		LOG.debug("Take: " + duration + "ms");
+		return "Take:" + duration + " ms <br>" + html;
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/test/showAllProduct.json", method = RequestMethod.GET, //
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	public List<Product> showAllProductJson() {
+		Long start = System.currentTimeMillis();
+		List<Product> list = null;
+		list = this.productRepository.findAll();
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
+		return list;
+	}
+
 }
