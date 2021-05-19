@@ -11,6 +11,8 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="/vendor/fontawesome-free/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,7 +20,7 @@
 
     </div>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="header">
         <div class="container">
             <a class="navbar-brand" href="#!">MStore</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -36,6 +38,14 @@
                     <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                 </ul>
+            </div>
+            <div class="collapse navbar-collapse">
+	            <ul class="navbar-nav ml-auto">
+		            <li class="nav-item"><a class="navbar-brand" href="#!"><i class="fas fa-search"></i></a></li>
+		            <li class="nav-item"><a class="navbar-brand" href="#!"><i class="far fa-heart"></i></a></li>
+		            <li class="nav-item"><a class="navbar-brand" href="#!"><i class="fas fa-cog"></i></a></li>
+		            <li class="nav-item"><a class="navbar-brand" href="#!"><i class="fas fa-shopping-bag"></i></a></li>
+	            </ul>
             </div>
         </div>
     </nav>
@@ -164,9 +174,13 @@
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
         </div>
     </footer>
+    <div id="back-to-top"><a href="#" class="back-to-top" style="display: none;" ><i class="fas fa-arrow-up"></i></a></div>
+    
     <!-- Bootstrap core JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Core theme JS-->
     <script src="js/app.js"></script>
 </body>
