@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Shop template",
   "main": "index.js",
+  "homepage": "https://github.com/maithanhduyan/m-store",
+  "title":"shop-template",
   "scripts": {
     "build": "npm run clean && npm run build:pug && npm run build:scss && npm run build:scripts && npm run build:assets",
     "build:assets": "node scripts/build-assets.js",

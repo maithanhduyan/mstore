@@ -1,9 +1,10 @@
 /*!
-* Start Bootstrap - undefined v1.0.0 (undefined)
-* Copyright 2013-2021 Mai Thành Duy An
-* Licensed under MIT (https://github.com/StartBootstrap/shop-template/blob/master/LICENSE)
+* MStore - shop-template version-1.0.0 (https://github.com/maithanhduyan/m-store)
+* Copyright © 2021. Mai Thành Duy An
+* Licensed under MIT (https://github.com/maithanhduyan/m-store/blob/master/LICENSE)
 */
-// scripts
+
+
 
 !(function($) {
     "use strict";
@@ -18,13 +19,25 @@
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
             $('#header').addClass('header-scrolled');
+            $('#header').addClass('stickyHeader');
+            $('#header').attr("data-aos","fade-down");
+            $('#header')
+                .css('opacity', 0)
+                .slideDown('slow')
+                .animate(
+                    { opacity: 1 },
+                    { queue: false, duration: 'slow' }
+                );
         } else {
             $('#header').removeClass('header-scrolled');
+            $('#header').removeClass('stickyHeader');
+            $('#header').removeAttr("data-aos","css");
         }
     });
 
     if ($(window).scrollTop() > 100) {
         $('#header').addClass('header-scrolled');
+        // $('#header').addClass('stickyHeader');
     }
 
 
