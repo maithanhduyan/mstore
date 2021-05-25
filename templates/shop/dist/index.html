@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#111">
+    <meta name="format-detection" content="telephone=no">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Mini Store" />
     <meta name="author" content="Mai Thành Duy An" />
     <title>Shop Homepage</title>
@@ -18,15 +22,26 @@
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg" data-aos="fade-down" id="header">
+    <nav class="navbar  navbar-light navbar-expand-md" data-aos="fade-down" id="header">
         <div class="container">
-            <div class="navbar-left">
+            <button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse"
+                data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="my-1 mx-2 close">X</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-logo">
                 <a class="navbar-brand" href="#!">Mini Store</a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                    class="navbar-toggler-icon"></span></button>
-            <div class="navbar-center" id="navbarResponsive">
+
+            <!-- For Mobile -->
+            <div class="mobile-shop-icon">
+                <a class="shop-icon-item"><i class="fas fa-search"></i></a>
+                <a class="shop-icon-item"><i class="fas fa-shopping-bag"></i></a>
+            </div>
+
+            <!-- Menu For Desktop -->
+            <div class="navbar-menu" id="navbarMenu">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="#!">
@@ -40,13 +55,15 @@
                     <li class="nav-item"><a class="nav-link" href="#!">BUY NOW</a></li>
                 </ul>
             </div>
-            <div class="navbar-right">
+
+            <!-- Icon -->
+            <div class="navbar-shop-icon">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="navbar-brand" href="#!"><i class="fas fa-search"></i></a></li>
-                    <li class="nav-item"><a class="navbar-brand" href="#!"><i class="fas fa-cog"></i></a></li>
-                    <li class="nav-item"><a class="navbar-brand" href="#!"><i class="far fa-heart"></i></a></li>
+                    <li class="nav-item"><a class="nav-icon" href="#!"><i class="fas fa-search"></i></a></li>
+                    <li class="nav-item"><a class="nav-icon" href="#!"><i class="fas fa-cog"></i></a></li>
+                    <li class="nav-item"><a class="nav-icon" href="#!"><i class="far fa-heart"></i></a></li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="#!">
+                        <a class="nav-icon" href="#!">
                             <i class="fas fa-shopping-bag"></i>
                         </a>
                         <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">0</span>
@@ -58,15 +75,7 @@
     <!-- Page Content-->
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <h1 class="my-4">Shop Name</h1>
-                <div class="list-group">
-                    <a class="list-group-item" href="#!">Category 1</a>
-                    <a class="list-group-item" href="#!">Category 2</a>
-                    <a class="list-group-item" href="#!">Category 3</a>
-                </div>
-            </div>
-            <div class="col-lg-9">
+            <div class="col-lg ">
                 <div class="carousel slide my-4" id="carouselExampleIndicators" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
@@ -75,11 +84,11 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active"><img class="d-block img-fluid"
-                                src="https://via.placeholder.com/900x350" alt="First slide" /></div>
+                                src="https://via.placeholder.com/1150x350" alt="First slide" /></div>
                         <div class="carousel-item"><img class="d-block img-fluid"
-                                src="https://via.placeholder.com/900x350" alt="Second slide" /></div>
+                                src="https://via.placeholder.com/1150x350" alt="Second slide" /></div>
                         <div class="carousel-item"><img class="d-block img-fluid"
-                                src="https://via.placeholder.com/900x350" alt="Third slide" /></div>
+                                src="https://via.placeholder.com/1150x350" alt="Third slide" /></div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -91,7 +100,7 @@
                     </a>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
                                     alt="..." /></a>
@@ -104,7 +113,7 @@
                             <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
                                     alt="..." /></a>
@@ -117,7 +126,7 @@
                             <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
                                     alt="..." /></a>
@@ -130,7 +139,7 @@
                             <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
                                     alt="..." /></a>
@@ -143,7 +152,7 @@
                             <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
                                     alt="..." /></a>
@@ -156,7 +165,137 @@
                             <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card h-100">
+                            <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
+                                    alt="..." /></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a href="#!">Item Six</a></h4>
+                                <h5>$24.99</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                    numquam aspernatur!</p>
+                            </div>
+                            <div class="card-footer"><small class="text-muted">★ ★ ★ ★ ☆</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card h-100">
                             <a href="#!"><img class="card-img-top" src="https://via.placeholder.com/700x400"
                                     alt="..." /></a>

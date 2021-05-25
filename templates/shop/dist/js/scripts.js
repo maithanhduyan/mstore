@@ -4,15 +4,14 @@
 * Licensed under MIT (https://github.com/maithanhduyan/m-store/blob/master/LICENSE)
 */
 
-
-
 !(function($) {
     "use strict";
 
     //Navbar Toggle Button Click
     $('.navbar-toggler').on('click', function() {
         // Change icon
-        $(this).children('.fa-bars, .fa-times').toggleClass("fa fa-bars fa fa-times");
+        // $(this).children('.fa-bars, .fa-times').toggleClass("fa fa-bars fa fa-times");
+         console.log('Toggle');
     });
 
     // Toggle .header-scrolled class to #header when page is scrolled
