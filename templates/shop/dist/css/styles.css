@@ -11074,6 +11074,12 @@ a.navbar-brand {
 
 /* For Mobile */
 @media only screen and (max-width: 766px) {
+  a.nav-link {
+    color: #fdfdfe !important;
+  }
+  .active{
+    color: #ffffff;
+  }
   .page-width {
     padding-left: 10px;
     padding-right: 10px;
@@ -11094,13 +11100,16 @@ a.navbar-brand {
   .navbar-menu {
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: 57px;
     left: 20px;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
-    min-width: 500px;
+    background-color: #333333;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #fff;
   }
+
 
   .navbar-shop-icon {
     display: none;

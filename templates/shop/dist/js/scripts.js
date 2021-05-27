@@ -8,10 +8,17 @@
     "use strict";
 
     //Navbar Toggle Button Click
+    let open_menu = false;
     $('.navbar-toggler').on('click', function() {
-        // Change icon
-        // $(this).children('.fa-bars, .fa-times').toggleClass("fa fa-bars fa fa-times");
-         console.log('Toggle');
+        if(!open_menu){
+            //$('.navbar-menu').css('width','80%')
+            open_menu = true;
+            console.log('Open');
+        }else{
+            //$('.navbar-menu').css('width','0px')
+            open_menu = false;
+            console.log('Close');
+        }
     });
 
     // Toggle .header-scrolled class to #header when page is scrolled
