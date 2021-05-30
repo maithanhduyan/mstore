@@ -1,4 +1,4 @@
-package com.mstore.repositories;
+package com.mstore.repositories.humanresource;
 
 
 import java.util.Date;
@@ -30,7 +30,7 @@ public class EmployeeRepositoryCustomImpl implements EmployeeRepositoryCustom {
    }
 
    @Override
-   public long updateEmployee(Long empId, String fullName, Date hireDate) {
+   public long updateEmployee(String empId, String fullName, Date hireDate) {
        Employee e = entityManager.find(Employee.class, empId);
        if (e == null) {
            return 0;

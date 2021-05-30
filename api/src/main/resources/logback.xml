@@ -2,7 +2,7 @@
 <configuration>
 
 	
-	<property name="LOG_FILE" value="smtore.log"/>
+	<property name="LOG_FILE" value="mstore.log"/>
 	
 	<!-- default.xml -->
 	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />

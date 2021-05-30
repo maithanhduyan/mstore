@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mstore.controller.MainController;
 import com.mstore.entities.Product;
-import com.mstore.repositories.EmployeeRepository;
 import com.mstore.repositories.ProductRepository;
+import com.mstore.repositories.humanresource.EmployeeRepository;
 import com.mstore.services.ProductService;
 
 @RestController
