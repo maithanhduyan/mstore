@@ -14,20 +14,26 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "USERS")
-public class User implements Serializable {
+@Table(name = "CUSTOMER")
+public class Customer implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2044752709199185865L;
 
 	@Id
 	@Column(name = "ID")
 	private String id;
 
-	@Column(name = "USERNAME")
-	private String username;
+	@Column(name = "NAME")
+	private String name;
 
-	@Column(name = "PASSWORD")
-	private String password;
+	@Column(name = "PHONE")
+	private String phone;
+
+	@Column(name = "ADDRESS")
+	private String address;
+
+	@Column(name = "EMAIL")
+	private String email;
 
 	@Column(name = "ACTIVE")
 	private int active;
@@ -40,7 +46,7 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
 
-	public User() {
+	public Customer() {
 	}
 
 	public String getId() {
@@ -51,20 +57,36 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getActive() {
@@ -93,8 +115,8 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", active=" + active
-				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+		return "Customer [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", email="
+				+ email + ", active=" + active + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
 }
