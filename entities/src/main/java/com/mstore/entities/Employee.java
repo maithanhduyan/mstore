@@ -1,6 +1,3 @@
-/**
- * @author Mai Thành Duy An
- */
 package com.mstore.entities;
 
 import java.io.Serializable;
@@ -14,23 +11,24 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "USERS")
-public class User implements Serializable {
+@Table(name = "EMPLOYEE")
+public class Employee implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7641822580130994913L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ID", nullable = false)
 	private String id;
 
-	@Column(name = "USERNAME")
-	private String username;
+	@Column(name = "NAME", nullable = false)
+	private String name;
 
-	@Column(name = "PASSWORD")
-	private String password;
+	@Column(name = "FULL_NAME", length = 128, nullable = false)
+	private String fullName;
 
-	@Column(name = "ACTIVE")
-	private int active;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "HIRE_DATE", nullable = false)
+	private Date hireDate;
 
 	@Column(name = "CREATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -40,7 +38,7 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
 
-	public User() {
+	public Employee() {
 	}
 
 	public String getId() {
@@ -51,28 +49,28 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public int getActive() {
-		return active;
+	public Date getHireDate() {
+		return hireDate;
 	}
 
-	public void setActive(int active) {
-		this.active = active;
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
 	}
 
 	public Date getCreatedDate() {
@@ -93,7 +91,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", active=" + active
+		return "Employee [id=" + id + ", name=" + name + ", fullName=" + fullName + ", hireDate=" + hireDate
 				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 

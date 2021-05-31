@@ -27,22 +27,22 @@ public class Order implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderDate;
 
-	@Column(name = "Order_Number")
+	@Column(name = "ORDER_NUMBER")
 	private int orderNumber;
 
-	@Column(name = "Amount")
+	@Column(name = "AMOUNT")
 	private double amount;
 
-	@Column(name = "Customer_Name")
+	@Column(name = "CUSTOMER_NAME")
 	private String customerName;
 
-	@Column(name = "Customer_Address")
+	@Column(name = "CUSTOMER_ADDRESS")
 	private String customerAddress;
 
-	@Column(name = "Customer_Email")
+	@Column(name = "CUSTOMER_EMAIL")
 	private String customerEmail;
 
-	@Column(name = "Customer_Phone")
+	@Column(name = "CUSTOMER_PHONE")
 	private String customerPhone;
 
 	@Column(name = "CREATED_BY")

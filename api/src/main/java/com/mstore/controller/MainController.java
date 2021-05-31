@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mstore.entities.Currency;
 import com.mstore.entities.Employee;
 import com.mstore.entities.Product;
-import com.mstore.repositories.EmployeeRepository;
+import com.mstore.repositories.CurrencyRepository;
 import com.mstore.repositories.ProductRepository;
+import com.mstore.repositories.humanresource.EmployeeRepository;
 import com.mstore.services.ProductService;
 
 @Controller
@@ -34,7 +36,9 @@ public class MainController {
 	@Autowired
 	private ProductService productService;
 
-	private static final String[] NAMES = new String[] { "Tom", "Jerry", "Donald" };
+	@Autowired
+	private CurrencyRepository currencyRepository;
+
 
 	@ResponseBody
 	@RequestMapping("/")
@@ -48,6 +52,7 @@ public class MainController {
 		html += " <li><a href='/test/addProduct'>Add Product</a></li>";
 		html += " <li><a href='/test/showAllProduct'>Show All Product</a></li>";
 		html += " <li><a href='/test/showAllProduct.json'>Show All Product JSON</a></li>";
+		html += " <li><a href='/test/showAllCurrency'>Show All Currency</a></li>";
 		html += "</ul>";
 		return html;
 	}
@@ -55,21 +60,21 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping("/test/InsertEmployee")
 	public String testInsert() {
-
+		String[] lastName = { "Lê", "Nguyễn", "Mai", "Võ", "Trần", "Phan", "Trịnh" };
+		String[] sampleNames = { "Nam", "An", "Tài", "Võ", "Đức", "Tiến", "Minh", "Trí", "Thiện", "Tâm" };
 		Long start = System.currentTimeMillis();
-		Long empIdMax = this.employeeRepository.getMaxId();
 
 		Employee employee = new Employee();
 
-		int random = new Random().nextInt(3);
-
-		long id = empIdMax + 1;
-		String fullName = NAMES[random] + " " + id;
+		String id = UUID.randomUUID().toString();
+		String name = sampleNames[new Random().nextInt(10)];
+		String fullName = lastName[new Random().nextInt(7)].toString() + " " + name;
 
 		employee.setId(id);
-		employee.setEmpNo("E" + id);
+		employee.setName(name);
 		employee.setFullName(fullName);
 		employee.setHireDate(new Date());
+		employee.setCreatedDate(new Date());
 		this.employeeRepository.save(employee);
 
 		LOG.debug(employee.toString());
@@ -165,4 +170,18 @@ public class MainController {
 		return list;
 	}
 
+	@ResponseBody
+	@RequestMapping("/test/showAllCurrency")
+	public String showAllCurrency() {
+		Long start = System.currentTimeMillis();
+		Iterable<Currency> currency = this.currencyRepository.findAll();
+
+		String html = "";
+		for (Currency c : currency) {
+			html += c + "<br>";
+		}
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
+		return "Take:" + duration + " ms <br>" + html;
+	}
 }

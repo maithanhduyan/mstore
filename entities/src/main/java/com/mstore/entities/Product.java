@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
-
 @Entity
 @Table(name = "PRODUCT")
 public class Product implements Serializable {
@@ -35,13 +33,13 @@ public class Product implements Serializable {
 
 	@Column(name = "SALE_PRICE")
 	private double salePrice;
-	
+
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
+
 	@Column(name = "LINK_URL")
 	private String linkURL;
-	
+
 	@Column(name = "IMAGE_URL")
 	private String imageURL;
 
@@ -66,6 +64,15 @@ public class Product implements Serializable {
 	private Date updatedDate;
 
 	public Product() {
+	}
+
+	private static Product _product = null;
+
+	public static Product getInstance() {
+		if (_product == null) {
+			_product = new Product();
+		}
+		return _product;
 	}
 
 	public String getId() {
