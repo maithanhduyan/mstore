@@ -37,13 +37,13 @@ public class OrderDetail implements Serializable {
 			foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
 	private Product product;
 
-	@Column(name = "Quanity", nullable = false)
+	@Column(name = "QUANTITY", nullable = false)
 	private int quanity;
 
-	@Column(name = "Price", nullable = false)
+	@Column(name = "PRICE", nullable = false)
 	private double price;
 
-	@Column(name = "Amount", nullable = false)
+	@Column(name = "AMOUNT", nullable = false)
 	private double amount;
 
 	@Column(name = "CREATED_BY")
