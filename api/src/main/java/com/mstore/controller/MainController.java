@@ -131,7 +131,7 @@ public class MainController {
 	public String addProduct() {
 		Long start = System.currentTimeMillis();
 		String id = UUID.randomUUID().toString();
-		Product product = new Product();
+		Product product = Product.getInstance();
 		product.setId(id);
 		int code = new Random().nextInt(200000);
 		product.setCode("C" + code);

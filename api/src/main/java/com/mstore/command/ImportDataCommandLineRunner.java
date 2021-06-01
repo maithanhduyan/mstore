@@ -62,6 +62,10 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 			int code = new Random().nextInt(200000);
 			p.setCode("CODE-" + code);
 			p.setCostPrice(new Random().nextInt(200000));
+			p.setImageURL("https://via.placeholder.com/700x400");
+			p.setLinkURL("https://via.placeholder.com/700x400");
+			p.setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!");
+			p.setSalePrice(new Random().nextInt(200000));
 			p.setActive(1);
 			p.setCreatedDate(new Date());
 			this.productRepository.save(p);

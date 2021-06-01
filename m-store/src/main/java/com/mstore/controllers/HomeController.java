@@ -19,13 +19,26 @@ public class HomeController {
 
 	@Autowired
 	ProductService productService;
+	private static String _version = "v1";
 
 	@RequestMapping(value = { "/" })
 	public String getHomPage(Model model) {
+		long start = System.currentTimeMillis();
 		model.addAttribute("message", "Mini Store");
 		List<Product> products = productService.findAll();
 		log.info("" + products.size());
 		model.addAttribute("products", products);
+
+		log.info("Take: " + (System.currentTimeMillis() - start) + " ms");
 		return "index";
+	}
+
+	@RequestMapping(value = { "/v1" })
+	public String getHomPageV2(Model model) {
+		model.addAttribute("message", "Mini Store");
+		List<Product> products = productService.findAll();
+		log.info("" + products.size());
+		model.addAttribute("products", products);
+		return "shop_" + _version;
 	}
 }

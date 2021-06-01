@@ -3,7 +3,6 @@
  */
 package com.mstore.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "PRODUCT")
-public class Product implements Serializable {
+public class Product implements BaseEntity {
 
 	private static final long serialVersionUID = -2629599562342979524L;
 	@Id
@@ -70,7 +69,10 @@ public class Product implements Serializable {
 
 	public static Product getInstance() {
 		if (_product == null) {
-			_product = new Product();
+			// Using Thread safe for instance Product
+			synchronized (Product.class) {
+				_product = new Product();
+			}
 		}
 		return _product;
 	}
