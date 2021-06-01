@@ -1,7 +1,66 @@
-/*!
-* Start Bootstrap - Shop Homepage v4.3.0 (https://startbootstrap.com/template/shop-homepage)
-* Copyright 2013-2021 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
-*/
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
+
+!(function($) {
+    "use strict";
+
+    //Navbar Toggle Button Click
+    let open_menu = false;
+    $('.navbar-toggler').on('click', function() {
+		$('.nav-toggle-icon i').removeClass();
+        if(!open_menu){
+            $('.nav-toggle-icon i').addClass('fa fa-times');
+            open_menu = true;
+            console.log('Open');
+        }else{
+		$('.nav-toggle-icon i').addClass('fa fa-bars');
+            open_menu = false;
+            console.log('Close');
+        }
+    });
+
+    // Toggle .header-scrolled class to #header when page is scrolled
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+            $('#header').addClass('header-scrolled');
+            $('#header').addClass('stickyHeader');
+            $('#header')
+                .css('opacity', 0)
+                .slideDown('slow')
+                .animate(
+                    { opacity: 1 },
+                    { queue: false, duration: 'slow' }
+                );
+        } else {
+            $('#header').removeClass('header-scrolled');
+            $('#header').removeClass('stickyHeader');
+        }
+    });
+
+    if ($(window).scrollTop() > 80) {
+        $('#header').addClass('header-scrolled');
+        // $('#header').addClass('stickyHeader');
+    }
+
+
+    // Back to top button
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
+    });
+    
+    $('.back-to-top').on("click",function() {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 800, 'easeInOutExpo');
+        return false;
+    });
+
+    // Initi AOS
+    AOS.init({
+        duration: 800,
+        easing: "ease-in-out"
+    });
+
+})(jQuery);

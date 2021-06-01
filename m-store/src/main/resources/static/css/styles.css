@@ -10833,3 +10833,110 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+/* -------------------------Custom Style Sheet--------------------------------- */
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: solid 1px #000;
+  right: 15px;
+  bottom: 15px;
+  background: #fff;
+  color: #000;
+  transition: display 0.5s ease-in-out;
+  z-index: 99999;
+  opacity: 0.7;
+}
+
+.back-to-top i {
+  font-size: 24px;
+  position: absolute;
+  top: 7px;
+  left: 8px;
+}
+
+.back-to-top:hover {
+  color: #fff;
+  background: #1E1E1E;
+  border: solid 1px #fff;
+  transition: background 0.2s ease-in-out;
+}
+
+/*--------------------------------------------------------------
+# Navigation bar
+--------------------------------------------------------------*/
+#header {
+  position: relative;
+  z-index: 15;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #eeeeee;
+  color: #000;
+}
+
+#header.stickyHeader {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  left: 0;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+  -webkit-animation: fadeIn 0.5s ease-in both;
+  animation: fadeIn 0.5s ease-in both;
+}
+
+/* CSS Fade-In Animation */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0.5;
+    transform: translate3d(0, -20%, 0);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+    transform: translate3d(0, -20%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* For Mobile */
+@media only screen and (max-width: 766px) {
+	.navbar-brand{
+		margin-left: auto !important;
+	    margin-right: auto !important;
+	    font-weight: bold;
+	    font-family: sans-serif;
+	}
+	
+	.navbar-toggler {
+	
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	.navbar-brand{
+		margin-left: auto !important;
+	    margin-right: auto !important;
+	    font-weight: bold;
+	    font-family: sans-serif;
+	}
+}
+
