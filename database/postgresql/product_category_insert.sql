@@ -1,0 +1,2 @@
+INSERT INTO public.productcategory (id,active,code,created_by,created_date,description,"name",updated_by,updated_date) VALUES
+	 ('1efa88e5-cc14-4862-9b54-472e3988bba6',1,'puzzle','ADMIN','2021-06-05 14:22:54.476','Trò Chơi Trí Tuệ','Puzzle',NULL,NULL);

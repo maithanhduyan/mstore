@@ -17,6 +17,7 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
     <!-- aos -->
     <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -67,15 +68,70 @@
             </div>
         </div>
     </nav>
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Shop in style</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With this shop home page template</p>
+
+    <!-- Carousel-->
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777" />
+                </svg>
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Example headline.</h1>
+                        <p>Some representative placeholder content for the first slide of the carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777" />
+                </svg>
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Another example headline.</h1>
+                        <p>Some representative placeholder content for the second slide of the carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777" />
+                </svg>
+
+                <div class="container">
+                    <div class="carousel-caption text-end">
+                        <h1>One more for good measure.</h1>
+                        <p>Some representative placeholder content for the third slide of this carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
@@ -84,8 +140,9 @@
                 <div class="col mb-5" th:each="product : ${products}">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
-                        </div>
+                        [(${product.badge})]
+                        <!-- <div class="sale-off-badge">Sale <span>-36%</span></div> -->
+                        <!-- <div class="new-badge ">New</div> -->
                         <!-- Product image-->
                         <img class="card-img-top" th:src="${product.imageURL}" th:alt="${product.description}" />
                         <!-- Product details-->
@@ -106,12 +163,15 @@
                                 <span class="text-muted text-decoration-line-through"
                                     th:text=" ${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">123.456</span>
                                 <span
-                                    th:text=" ${#numbers.formatDecimal(product.costPrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">1234.456</span>
+                                    th:text=" ${#numbers.formatDecimal(product.promoPrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">1234.456</span>
+                                <div  class="d-flex justify-content-center small "><a class="link-dark nounderline" href="#"><i class="far fa-heart"></i> </a></div>
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            <div class="text-center">
+                            	
+                            	<a class="btn btn-outline-dark mt-auto" href="#"><i class="bi-cart-fill me-1"></i> Add to cart</a>
                             </div>
                         </div>
                     </div>

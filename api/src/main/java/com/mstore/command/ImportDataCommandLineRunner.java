@@ -19,9 +19,11 @@ import org.springframework.stereotype.Component;
 import com.mstore.entities.Currency;
 import com.mstore.entities.Employee;
 import com.mstore.entities.Product;
+import com.mstore.entities.ProductCategory;
 import com.mstore.entities.Shop;
 import com.mstore.entities.User;
 import com.mstore.repositories.CurrencyRepository;
+import com.mstore.repositories.ProductCategoryRepository;
 import com.mstore.repositories.ProductRepository;
 import com.mstore.repositories.ShopRepository;
 import com.mstore.repositories.humanresource.EmployeeRepository;
@@ -37,6 +39,9 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
 
 	@Autowired
 	EmployeeRepository employeeRepository;
@@ -59,6 +64,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		for (int i = 0; i < args.length; i++) {
 			log.info(args[i].toString());
 			if (args[i].toString().equalsIgnoreCase("--DataSample=true")) {
+				insertProductCategoryDataSample();
 				insertProductDataSample();
 				insertEmployeeDataSample();
 				insertUserDataSample();
@@ -70,21 +76,42 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		}
 	}
 
+	 int insertProductCategoryDataSample() {
+		ProductCategory pCategory1 = new ProductCategory();
+		pCategory1.setId("4a80657a-ad1f-4f6c-ab69-3cd7b2bb25cd");
+		pCategory1.setName("Puzzle");
+		pCategory1.setActive(1);
+		pCategory1.setCode("puzzle");
+		pCategory1.setDescription("Trò Chơi Trí Tuệ");
+		pCategory1.setCreatedDate(new Date());
+		pCategory1.setCreatedBy("ADMIN");
+		productCategoryRepository.save(pCategory1);
+
+		return 1;
+	}
+
 	// Insert Product Function
 	int insertProductDataSample() {
+		String[] badges = {"<div class=\"sale-off-badge\">Sale <span>-36%</span></div>","<div class=\"new-badge \">New</div>"};
 		Long start = System.currentTimeMillis();
 		for (int i = 0; i < 10; i++) {
 			Product p = new Product();
 			p.setId(UUID.randomUUID().toString());
 			int code = new Random().nextInt(200000);
+			p.setName("Battle_Cast_Star Puzzle Game");
 			p.setCode("CODE-" + code);
-			p.setCostPrice(new Random().nextInt(200000));
+			p.setBadge(badges[new Random().nextInt(2)]);
+			int costPrice = new Random().nextInt(200000);
+			p.setCostPrice(costPrice);
 			p.setImageURL("https://via.placeholder.com/700x400");
 			p.setLinkURL("https://via.placeholder.com/700x400");
 			p.setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!");
-			p.setSalePrice(new Random().nextInt(200000));
+			int salePrice = costPrice + (costPrice * 30 / 100);
+			p.setSalePrice(salePrice);
+			p.setPromoPrice(salePrice - (salePrice * new Random().nextInt(20) /100));
 			p.setActive(1);
 			p.setCreatedDate(new Date());
+			p.setCategory(productCategoryRepository.getOne("4a80657a-ad1f-4f6c-ab69-3cd7b2bb25cd"));
 			this.productRepository.save(p);
 		}
 		Long duration = System.currentTimeMillis() - start;

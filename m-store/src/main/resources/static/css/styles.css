@@ -11801,6 +11801,7 @@ fieldset:disabled .btn {
 .nounderline {
   text-decoration: none !important
 }
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -11938,4 +11939,86 @@ a.nav-icon {
   /* top: -3px; */
   margin-left: -18px;
   text-align: center;
+}
+
+/*--------------------------------------------------------------
+# SHOP
+--------------------------------------------------------------*/
+.sale-off-badge {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  padding: 0.65em 0.65em;
+  /* font-size: 0.75em; */
+  /* font-weight: 700; */
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  vertical-align: baseline;
+  /* background-color: #dc3545 !important; */
+  background-color: #ff4e00 !important;
+  position: absolute !important;
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.new-badge {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  padding: 0.65em 0.65em;
+  background-color: #109533 !important;
+  border-radius: 50%;
+  line-height: 1;
+  position: absolute !important;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: -4rem;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+}
+
+.carousel-item>img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
 }

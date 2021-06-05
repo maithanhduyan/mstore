@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "PRODUCTCATEGORY")
+@Table(name = "PRODUCT_CATEGORY")
 public class ProductCategory implements Serializable {
 
 	private static final long serialVersionUID = -3276434914260910835L;
@@ -48,6 +48,24 @@ public class ProductCategory implements Serializable {
 	@Column(name = "UPDATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
+
+	public ProductCategory() {
+		super();
+	}
+
+	public ProductCategory(String id, String name, String code, String description, int active, String createdBy,
+			String updatedBy, Date createdDate, Date updatedDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.code = code;
+		this.description = description;
+		this.active = active;
+		this.createdBy = createdBy;
+		this.updatedBy = updatedBy;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+	}
 
 	public String getId() {
 		return id;
@@ -128,5 +146,4 @@ public class ProductCategory implements Serializable {
 				+ createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
-	
 }

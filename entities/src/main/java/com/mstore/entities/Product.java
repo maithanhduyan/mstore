@@ -7,7 +7,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,11 +31,21 @@ public class Product implements BaseEntity {
 	@Column(name = "CODE")
 	private String code;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CATEGORY_ID", foreignKey = @ForeignKey(name = "PRODUCT_CATEGORY_FK"))
+	private ProductCategory category;
+
 	@Column(name = "COST_PRICE")
 	private double costPrice;
 
 	@Column(name = "SALE_PRICE")
 	private double salePrice;
+
+	@Column(name = "PROMO_PRICE")
+	private double promoPrice;
+
+	@Column(name = "PROMO_STATUS")
+	private int promoStatus;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -44,6 +58,9 @@ public class Product implements BaseEntity {
 
 	@Column(name = "ACTIVE")
 	private int active;
+
+	@Column(name = "BADGE")
+	private String badge;
 
 	@Column(name = "IN_STOCK")
 	private int inStock;
@@ -101,11 +118,19 @@ public class Product implements BaseEntity {
 		this.code = code;
 	}
 
+	public ProductCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(ProductCategory category) {
+		this.category = category;
+	}
+
 	public double getCostPrice() {
 		return costPrice;
 	}
 
-	public void setCostPrice(int costPrice) {
+	public void setCostPrice(double costPrice) {
 		this.costPrice = costPrice;
 	}
 
@@ -113,8 +138,48 @@ public class Product implements BaseEntity {
 		return salePrice;
 	}
 
-	public void setSalePrice(int salePrice) {
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
+	}
+
+	public double getPromoPrice() {
+		return promoPrice;
+	}
+
+	public void setPromoPrice(double promoPrice) {
+		this.promoPrice = promoPrice;
+	}
+
+	public int getPromoStatus() {
+		return promoStatus;
+	}
+
+	public void setPromoStatus(int promoStatus) {
+		this.promoStatus = promoStatus;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLinkURL() {
+		return linkURL;
+	}
+
+	public void setLinkURL(String linkURL) {
+		this.linkURL = linkURL;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 	public int getActive() {
@@ -123,6 +188,14 @@ public class Product implements BaseEntity {
 
 	public void setActive(int active) {
 		this.active = active;
+	}
+
+	public String getBadge() {
+		return badge;
+	}
+
+	public void setBadge(String badge) {
+		this.badge = badge;
 	}
 
 	public int getInStock() {
@@ -165,35 +238,20 @@ public class Product implements BaseEntity {
 		this.updatedDate = updatedDate;
 	}
 
-	public String getDescription() {
-		return description;
+	public static Product get_product() {
+		return _product;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLinkURL() {
-		return linkURL;
-	}
-
-	public void setLinkURL(String linkURL) {
-		this.linkURL = linkURL;
-	}
-
-	public String getImageURL() {
-		return imageURL;
-	}
-
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public static void set_product(Product _product) {
+		Product._product = _product;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", costPrice=" + costPrice + ", salePrice="
-				+ salePrice + ", description=" + description + ", linkURL=" + linkURL + ", imageURL=" + imageURL
-				+ ", active=" + active + ", inStock=" + inStock + ", createdBy=" + createdBy + ", updatedBy="
+		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", category=" + category + ", costPrice="
+				+ costPrice + ", salePrice=" + salePrice + ", promoPrice=" + promoPrice + ", promoStatus=" + promoStatus
+				+ ", description=" + description + ", linkURL=" + linkURL + ", imageURL=" + imageURL + ", active="
+				+ active + ", badge=" + badge + ", inStock=" + inStock + ", createdBy=" + createdBy + ", updatedBy="
 				+ updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
