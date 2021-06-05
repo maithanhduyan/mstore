@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mstore.entities.Currency;
 import com.mstore.entities.Employee;
 import com.mstore.entities.Product;
+import com.mstore.entities.Shop;
 import com.mstore.repositories.CurrencyRepository;
 import com.mstore.repositories.ProductRepository;
+import com.mstore.repositories.ShopRepository;
 import com.mstore.repositories.humanresource.EmployeeRepository;
 import com.mstore.services.ProductService;
 
@@ -39,6 +41,8 @@ public class MainController {
 	@Autowired
 	private CurrencyRepository currencyRepository;
 
+	@Autowired
+	private ShopRepository shopRepository;
 
 	@ResponseBody
 	@RequestMapping("/")
@@ -53,6 +57,7 @@ public class MainController {
 		html += " <li><a href='/test/showAllProduct'>Show All Product</a></li>";
 		html += " <li><a href='/test/showAllProduct.json'>Show All Product JSON</a></li>";
 		html += " <li><a href='/test/showAllCurrency'>Show All Currency</a></li>";
+		html += " <li><a href='/test/showShopInfo'>Show Shop Info</a></li>";
 		html += "</ul>";
 		return html;
 	}
@@ -180,6 +185,23 @@ public class MainController {
 		for (Currency c : currency) {
 			html += c + "<br>";
 		}
+		Long duration = System.currentTimeMillis() - start;
+		LOG.debug("Take: " + duration + "ms");
+		return "Take:" + duration + " ms <br>" + html;
+	}
+
+	@ResponseBody
+	@RequestMapping("/test/showShopInfo")
+	public String showShopInfo() {
+		Long start = System.currentTimeMillis();
+		LOG.info("" + shopRepository.findAll().size());
+		List<Shop> shops = shopRepository.findAll();
+
+		String html = "";
+		for (Shop s : shops) {
+			html += s + "<br>";
+		}
+
 		Long duration = System.currentTimeMillis() - start;
 		LOG.debug("Take: " + duration + "ms");
 		return "Take:" + duration + " ms <br>" + html;

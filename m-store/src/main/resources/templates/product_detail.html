@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title th:utext="${message}"></title>
+    <title></title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
     <!-- fontawesome -->
@@ -32,7 +32,7 @@
             </button>
 
             <!-- Logo -->
-            <a class="navbar-brand" href="#!" th:utext="${message}">Start Bootstrap</a>
+            <a class="navbar-brand" href="#!">MStore</a>
 
             <!-- Nav Menu -->
             <div class="navbar-collapse collapse navbar-menu" id="navbarSupportedContent">
@@ -67,64 +67,41 @@
             </div>
         </div>
     </nav>
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Shop in style</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With this shop home page template</p>
-            </div>
-        </div>
-    </header>
-    <!-- Section-->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-                <div class="col mb-5" th:each="product : ${products}">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
-                        </div>
-                        <!-- Product image-->
-                        <img class="card-img-top" th:src="${product.imageURL}" th:alt="${product.description}" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder"><a class="link-dark nounderline"
-                                        th:href="'product/' + ${product.id}" th:utext="${product.name}"></a></h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through"
-                                    th:text=" ${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">123.456</span>
-                                <span
-                                    th:text=" ${#numbers.formatDecimal(product.costPrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">1234.456</span>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
+    <!-- Product section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="${product.imageURL}" alt="" />
+                </div>
+                <div class="col-md-6">
+                    <div class="small mb-1">SKU: BST-498</div>
+                    <h1 class="display-5 fw-bolder">[[${product.name}]]</h1>
+                    <div class="fs-5 mb-5">
+                        <span class="text-decoration-line-through"
+                            th:text=" ${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">1000.00</span>
+                        <span
+                            th:text=" ${#numbers.formatDecimal(product.costPrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">123.456</span>
+                    </div>
+                    <p class="lead">[[${product.description}]]</p>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
+                            style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>
+
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; [[${message}]] 2021</p>
+            <p class="m-0 text-center text-white">Copyright &copy; [['MStore']] 2021</p>
         </div>
     </footer>
 

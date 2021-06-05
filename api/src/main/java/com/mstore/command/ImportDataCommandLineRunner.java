@@ -10,21 +10,30 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.mstore.entities.Currency;
 import com.mstore.entities.Employee;
 import com.mstore.entities.Product;
+import com.mstore.entities.Shop;
 import com.mstore.entities.User;
 import com.mstore.repositories.CurrencyRepository;
 import com.mstore.repositories.ProductRepository;
+import com.mstore.repositories.ShopRepository;
 import com.mstore.repositories.humanresource.EmployeeRepository;
 import com.mstore.repositories.humanresource.UserRepository;
 
 @Component
+@PropertySource("classpath:shop.properties")
 public class ImportDataCommandLineRunner implements CommandLineRunner {
 	private static final Logger log = LoggerFactory.getLogger(ImportDataCommandLineRunner.class);
+
+	@Autowired
+	private Environment env;
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -38,6 +47,13 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	ShopRepository shopRepository;
+
+	// Shop properties
+	@Value("${shop.name}")
+	private String shopName;
+
 	@Override
 	public void run(String... args) throws Exception {
 		for (int i = 0; i < args.length; i++) {
@@ -47,6 +63,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 				insertEmployeeDataSample();
 				insertUserDataSample();
 				insertCurrencyDataSample();
+				insertShopDataSample();
 				break;
 			}
 
@@ -103,6 +120,14 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		user.setCreatedDate(new Date());
 		user.setActive(1);
 		this.userRepository.save(user);
+		return 1;
+	}
+
+	int insertShopDataSample() {
+		Shop shop = new Shop();
+		shop.setId(UUID.randomUUID().toString());
+		shop.setName(shopName);
+		this.shopRepository.save(shop);
 		return 1;
 	}
 

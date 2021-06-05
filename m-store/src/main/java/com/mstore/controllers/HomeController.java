@@ -21,7 +21,7 @@ public class HomeController {
 	ProductService productService;
 	private static String _version = "v1";
 
-	@RequestMapping(value = { "/" })
+	@RequestMapping(value = { "/","/index.html" })
 	public String getHomPage(Model model) {
 		long start = System.currentTimeMillis();
 		model.addAttribute("message", "Mini Store");
