@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mstore.entities.Product;
 import com.mstore.repositories.ProductRepository;
+import com.mstore.services.ProductCategoryService;
 import com.mstore.services.ProductService;
 
 @Controller
@@ -24,6 +25,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	ProductCategoryService productCategoryService;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getProduct(@PathVariable("id") String id, Model model) {
@@ -32,6 +36,8 @@ public class ProductController {
 			if (id != null) {
 				product = productService.findById(id);
 				log.info(product.toString());
+				
+				model.addAttribute("productCategories", productCategoryService.findAll());
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception

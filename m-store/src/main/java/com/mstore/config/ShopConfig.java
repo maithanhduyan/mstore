@@ -44,6 +44,7 @@ public class ShopConfig {
 			_shop.setId(UUID.randomUUID().toString());
 			_shop.setName(env.getProperty("shop.name","Mstore"));
 			AppService.context.put("shop", _shop);
+			AppService.context.put("shop.name", _shop.getName());
 		}
 		AppService.context.put("url",_shopDomainName);
 		log.info("Initial Shop Config. " + AppService.context + " . " + AppService.context.size());

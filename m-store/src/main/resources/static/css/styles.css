@@ -11802,6 +11802,10 @@ fieldset:disabled .btn {
   text-decoration: none !important
 }
 
+.noborder {
+  border: 0 none;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -11900,12 +11904,69 @@ fieldset:disabled .btn {
     font-weight: bold;
     font-family: sans-serif;
   }
+
+  #search_box {
+    margin: left 0px;
+    display: none;
+  }
 }
 
 
 ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4 {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+/* CUSTOMIZE SEARCH BOX -------------------------------------------------- */
+#searchPopup {
+  width: 100%;
+  padding: 40px 50px;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  transform: translateY(-100%);
+
+  /* common */
+  color: #050000;
+  text-align: left;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgb(5 0 0 / 10%);
+  transition: all 0.3s ease-in-out;
+}
+
+#searchPopup.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease-in-out;
+}
+
+#searchPopup div div input.search-input {
+  color: #050000;
+  margin-right: 10px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  border-bottom: solid 1px #000;
+}
+
+#searchPopup form div button {
+  border: 0;
+  border-radius: 0;
+}
+
+#searchPopup.hidden {
+  display: none;
+}
+
+#searchPopup .closeSearch {
+  color: #050000;
+  font-size: 24px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
 }
 
 .navbar-shop-icon {

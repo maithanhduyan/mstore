@@ -28,13 +28,11 @@ public class ShoppingCartItem implements Serializable {
 	private String id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SHOPPING_CART_ID", nullable = false, //
-			foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_SHOPPING_CART_FK"))
+	@JoinColumn(name = "SHOPPING_CART_ID", foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_SHOPPING_CART_ID_FK"))
 	private ShoppingCart shoppingCartId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PRODUCT_ID", nullable = false, //
-			foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_PRODUCT_FK"))
+	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_PRODUCT_ID_FK"))
 	private Product product;
 
 	@Column(name = "QUANTITY", nullable = false)

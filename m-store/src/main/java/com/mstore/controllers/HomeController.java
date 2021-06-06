@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mstore.entities.Product;
+import com.mstore.services.ProductCategoryService;
 import com.mstore.services.ProductService;
 
 @Controller
@@ -19,6 +20,10 @@ public class HomeController {
 
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	ProductCategoryService productCategoryService;
+	
 	private static String _version = "v1";
 
 	@RequestMapping(value = { "/","/index.html" })
@@ -28,6 +33,7 @@ public class HomeController {
 		List<Product> products = productService.findAll();
 		log.info("" + products.size());
 		model.addAttribute("products", products);
+		model.addAttribute("productCategories", productCategoryService.findAll());
 
 		log.info("Take: " + (System.currentTimeMillis() - start) + " ms");
 		return "index";

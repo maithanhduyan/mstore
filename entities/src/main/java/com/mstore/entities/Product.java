@@ -32,8 +32,8 @@ public class Product implements BaseEntity {
 	private String code;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CATEGORY_ID", foreignKey = @ForeignKey(name = "PRODUCT_CATEGORY_FK"))
-	private ProductCategory category;
+	@JoinColumn(name = "SUB_CATEGORY_ID", foreignKey = @ForeignKey(name = "PRODUCT_PRODUCT_SUB_CATEGORY_FK"))
+	private ProductSubCategory subCategory;
 
 	@Column(name = "COST_PRICE")
 	private double costPrice;
@@ -46,6 +46,9 @@ public class Product implements BaseEntity {
 
 	@Column(name = "PROMO_STATUS")
 	private int promoStatus;
+
+	@Column(name = "SKU")
+	private String sku;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -118,12 +121,12 @@ public class Product implements BaseEntity {
 		this.code = code;
 	}
 
-	public ProductCategory getCategory() {
-		return category;
+	public ProductSubCategory getSubCategory() {
+		return subCategory;
 	}
 
-	public void setCategory(ProductCategory category) {
-		this.category = category;
+	public void setSubCategory(ProductSubCategory subCategory) {
+		this.subCategory = subCategory;
 	}
 
 	public double getCostPrice() {
@@ -164,6 +167,14 @@ public class Product implements BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 
 	public String getLinkURL() {
@@ -248,11 +259,12 @@ public class Product implements BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", category=" + category + ", costPrice="
-				+ costPrice + ", salePrice=" + salePrice + ", promoPrice=" + promoPrice + ", promoStatus=" + promoStatus
-				+ ", description=" + description + ", linkURL=" + linkURL + ", imageURL=" + imageURL + ", active="
-				+ active + ", badge=" + badge + ", inStock=" + inStock + ", createdBy=" + createdBy + ", updatedBy="
-				+ updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+		return "Product [id=" + id + ", name=" + name + ", code=" + code + ", subCategory=" + subCategory
+				+ ", costPrice=" + costPrice + ", salePrice=" + salePrice + ", promoPrice=" + promoPrice
+				+ ", promoStatus=" + promoStatus + ", sku=" + sku + ", description=" + description + ", linkURL="
+				+ linkURL + ", imageURL=" + imageURL + ", active=" + active + ", badge=" + badge + ", inStock="
+				+ inStock + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + "]";
 	}
 
 }
