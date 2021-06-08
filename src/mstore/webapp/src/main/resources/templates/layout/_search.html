@@ -1,0 +1,22 @@
+<div id="searchPopup" class="hidden" xmlns:th="http://www.thymeleaf.org">
+    <a class="closeSearch"><i class="fas fa-times"></i></a>
+    <h4>What are you looking for?</h4>
+    <div class="w-100 me-3">
+        <div class="input-group">
+            <select class="selectpicker noborder shadow-none" id="" style="width:auto;">
+                <option selected>ALL PRODUCT CATEGORY</option>
+                <option th:each="productCategory : ${productCategories}" th:value="${productCategory.id}"
+                    th:text="${productCategory.name}"></option>
+            </select>&nbsp;
+
+            <input type="search" class="form-control search-input shadow-none" placeholder="Search..."
+                aria-label="Search">
+            <div class="input-group-append">
+                <a class="btn" type="button" id="searchProduct">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title th:utext="${message}"></title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+    <!-- fontawesome -->
+    <link th:href="@{/vendor/font-awesome/css/all.min.css}" rel="stylesheet">
+    <!-- Bootstrap icons-->
+    <link th:href="@{/vendor/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <!-- aos -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation-->
+    <th:block th:include="layout/_navbar"></th:block>
+
+    <!-- Carousel-->
+    <th:block th:include="layout/_carousel"></th:block>
+
+
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                <div class="col mb-5" th:each="product : ${products}">
+                    <div class="card h-100">
+                        <input type="hidden" th:value="${product.id}">
+                        <!-- Sale badge-->
+                        [(${product.badge})]
+                        <!-- <div class="sale-off-badge">Sale <span>-36%</span></div> -->
+                        <!-- <div class="new-badge ">New</div> -->
+                        <!-- Product image-->
+                        <img class="card-img-top" th:src="${product.imageURL}" th:alt="${product.description}" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder"><a class="link-dark nounderline"
+                                        th:href="'product/' + ${product.id}" th:utext="${product.name}"></a></h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through"
+                                    th:text=" ${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">123.456</span>
+                                <span
+                                    th:text=" ${#numbers.formatDecimal(product.promoPrice, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">1234.456</span>
+                                <div class="d-flex justify-content-center small "><a class="link-dark nounderline"
+                                        href="#"><i class="far fa-heart"></i> </a></div>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto add-to-card"><i class="bi-cart-fill me-1"></i>Add
+                                    to cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <th:block th:include="layout/_footer"></th:block>
+
+
+
+    <div id="back-to-top">
+        <a href="#" class="back-to-top" style="display: none;"><i class="fas fa-arrow-up"></i></a>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script th:src="@{/vendor/jquery.easing/jquery.easing.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/aos/aos.js}"></script>
+    <!-- Core theme JS-->
+    <script th:src="@{/js/scripts.js}"></script>
+    <th:block th:include="layout/_scripts"></th:block>
+    <script type="text/javascript">
+
+        var cartCounter = 0;
+
+        // Add To Cart
+        $(".add-to-card").on("click", function () {
+            // console.log("Add to cart");
+            var cart = $('.fa-shopping-bag');
+            var imgtodrag = $(this).closest('div[class^="card h-100"]').find("img").eq(0);
+            var productId = $(this).closest('div[class^="card h-100"]').find("input").eq(0).val();
+            console.log(productId);
+            if (imgtodrag) {
+                var imgclone = imgtodrag.clone()
+                    .offset({
+                        top: imgtodrag.offset().top + 200,
+                        left: imgtodrag.offset().left
+                    })
+                    .css({
+                        'opacity': '0.9',
+                        'position': 'absolute',
+                        'height': '350px',
+                        'width': '350px',
+                        'z-index': '200'
+                    })
+                    .appendTo($('body'))
+                    .animate({
+                        'top': cart.offset().top + 10,
+                        'left': cart.offset().left + 10,
+                        'width': 75,
+                        'height': 75
+                    }, 1000, 'easeInOutCubic');
+
+                setTimeout(function () {
+                    // cart.effect("shake", {
+                    //     times: 2,
+                    //     direction: 'up'
+                    // }, 200);
+                    $('#CartCount').text(++cartCounter);
+                }, 1500);
+
+                imgclone.animate({
+                    'width': 0,
+                    'height': 0
+                }, function () {
+                    $(this).detach()
+                });
+            }
+            //console.log(imgtodrag);
+
+            $.ajax({
+                type: "POST",
+                url: '/cart/add',
+                data: {
+                    productId: productId
+                },
+                success: function (data, status, xhr) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(xhr);
+                },
+                dataType: 'application/JSON'
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
