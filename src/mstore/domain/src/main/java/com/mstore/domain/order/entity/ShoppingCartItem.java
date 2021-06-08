@@ -27,11 +27,11 @@ public class ShoppingCartItem implements Serializable {
 	private String id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SHOPPING_CART_ID", foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_SHOPPING_CART_ID_FK"))
-	private ShoppingCart shoppingCartId;
+	@JoinColumn(name = "SHOPPING_CART_ID", foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_SHOPPING_CART_FK"))
+	private ShoppingCart shoppingCart;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_PRODUCT_ID_FK"))
+	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "SHOPPING_CART_ITEM_PRODUCT_FK"))
 	private Product product;
 
 	@Column(name = "QUANTITY", nullable = false)
@@ -63,11 +63,11 @@ public class ShoppingCartItem implements Serializable {
 	public ShoppingCartItem() {
 	}
 
-	public ShoppingCartItem(String id, ShoppingCart shoppingCartId, Product product, int quanity, double amount,
+	public ShoppingCartItem(String id, ShoppingCart shoppingCart, Product product, int quanity, double amount,
 			String createdBy, int active, String updatedBy, Date createdDate, Date updatedDate, String description) {
 		super();
 		this.id = id;
-		this.shoppingCartId = shoppingCartId;
+		this.shoppingCart = shoppingCart;
 		this.product = product;
 		this.quanity = quanity;
 		this.amount = amount;
@@ -96,12 +96,12 @@ public class ShoppingCartItem implements Serializable {
 		this.id = id;
 	}
 
-	public ShoppingCart getShoppingCartId() {
-		return shoppingCartId;
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
 	}
 
-	public void setShoppingCartId(ShoppingCart shoppingCartId) {
-		this.shoppingCartId = shoppingCartId;
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 
 	public Product getProduct() {
@@ -186,10 +186,10 @@ public class ShoppingCartItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ShoppingCartItem [id=" + id + ", shoppingCartId=" + shoppingCartId + ", product=" + product
-				+ ", quanity=" + quanity + ", amount=" + amount + ", createdBy=" + createdBy + ", active=" + active
-				+ ", updatedBy=" + updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
-				+ ", description=" + description + "]";
+		return "ShoppingCartItem [id=" + id + ", shoppingCart=" + shoppingCart + ", product=" + product + ", quanity="
+				+ quanity + ", amount=" + amount + ", createdBy=" + createdBy + ", active=" + active + ", updatedBy="
+				+ updatedBy + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", description="
+				+ description + "]";
 	}
 
 }
