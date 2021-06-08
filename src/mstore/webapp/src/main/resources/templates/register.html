@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title th:utext="${shop.Name} ">shopName</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+	<!-- fontawesome -->
+	<link th:href="@{/vendor/font-awesome/css/all.min.css}" rel="stylesheet">
+	<!-- Bootstrap icons-->
+	<link th:href="@{/vendor/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link th:href="@{/css/styles.css}" rel="stylesheet" />
+	<!-- aos -->
+	<link th:href="@{/vendor/aos/aos.css}" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light " data-aos="fade-down" id="header">
+		<div class="container px-4 px-lg-5">
+
+			<!-- Toggle Button -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="nav-toggle-icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+			</button>
+
+			<!-- Logo -->
+			<a class="navbar-brand" href="#!">MSTORE</a>
+
+			<!-- Nav Menu -->
+			<div class="navbar-collapse collapse navbar-menu" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">HOME</a></li>
+					<li class="nav-item"><a class="nav-link" href="#!">FEATURES</a></li>
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">SHOP</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="#!">All Products</a></li>
+							<li>
+								<hr class="dropdown-divider" />
+							</li>
+							<li><a class="dropdown-item" href="#!">Popular Items</a></li>
+							<li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- Icon -->
+			<div class="navbar-shop-icon">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-icon" href="#!"><i class="far fa-heart"></i></a></li>
+					<li class="nav-item"><a class="nav-icon" href="#!"> <i class="fas fa-shopping-bag"></i>
+						</a> <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">0</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Section-->
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-7">
+					<div class="card shadow-lg border-1 rounded-lg mt-5">
+						<div class="card-header">
+							<h3 class="text-center font-weight-light my-4">Create Account</h3>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputFirstName" type="text"
+												placeholder="Enter your first name">
+											<label for="inputFirstName">First name</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-floating">
+											<input class="form-control" id="inputLastName" type="text"
+												placeholder="Enter your last name">
+											<label for="inputLastName">Last name</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-floating mb-3">
+									<input class="form-control" id="inputEmail" type="email"
+										placeholder="name@example.com">
+									<label for="inputEmail">Email address</label>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputPassword" type="password"
+												placeholder="Create a password">
+											<label for="inputPassword">Password</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputPasswordConfirm" type="password"
+												placeholder="Confirm password">
+											<label for="inputPasswordConfirm">Confirm Password</label>
+										</div>
+									</div>
+								</div>
+								<div class="mt-4 mb-0">
+									<div class="d-grid"><a class="btn btn-dark btn-block" th:href="@{/user/login.html}">Create
+											Account</a></div>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer text-center py-3">
+							<div class="small"><a th:href="@{/user/login.html}">Have an account? Go to login</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy;
+				[[${message}]] 2021</p>
+		</div>
+	</footer>
+
+	<div id="back-to-top">
+		<a href="#" class="back-to-top" style="display: none;"><i class="fas fa-arrow-up"></i></a>
+	</div>
+	<!-- Bootstrap core JS-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/jquery.easing/jquery.easing.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/vendor/aos/aos.js}"></script>
+	<!-- Core theme JS-->
+	<script th:src="@{/js/scripts.js}"></script>
+</body>
+
+</html>

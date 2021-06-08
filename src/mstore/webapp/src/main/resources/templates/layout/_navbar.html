@@ -1,0 +1,58 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light " data-aos="fade-down" id="header"
+    xmlns:th="http://www.thymeleaf.org">
+    <div class="container px-4 px-lg-5">
+
+        <!-- Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="nav-toggle-icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+        </button>
+
+        <!-- Logo -->
+        <a class="navbar-brand" th:href="@{/}">MStore</a>
+
+        <!-- Nav Menu -->
+        <div class="navbar-collapse collapse navbar-menu" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">HOME</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!"  id="cateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">CATEGORY</a>
+                    <ul class="dropdown-menu" aria-labelledby="cateDropdown">
+                        <li><a class="dropdown-item" href="#!">TOY</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">SHOP</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Icon -->
+        <div class="navbar-shop-icon">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-icon" href="#!" id="btn_search"><i class="fas fa-search"></i></a>
+                </li>
+                <li class="nav-item"><a class="nav-icon" href="#!"><i class="far fa-heart"></i></a></li>
+                <li class="nav-item">
+                    <a class="nav-icon" th:href="@{/cart.html}">
+                        <i class="fas fa-shopping-bag"></i>
+                    </a>
+                    <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">0</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Search Popup-->
+<th:block th:include="layout/_search"></th:block>
