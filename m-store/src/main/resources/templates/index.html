@@ -36,6 +36,7 @@
 
                 <div class="col mb-5" th:each="product : ${products}">
                     <div class="card h-100">
+                        <input type="hidden" th:value="${product.id}">
                         <!-- Sale badge-->
                         [(${product.badge})]
                         <!-- <div class="sale-off-badge">Sale <span>-36%</span></div> -->
@@ -95,7 +96,6 @@
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/vendor/aos/aos.js}"></script>
     <!-- Core theme JS-->
-    <!-- Core theme JS-->
     <script th:src="@{/js/scripts.js}"></script>
     <th:block th:include="layout/_scripts"></th:block>
     <script type="text/javascript">
@@ -107,7 +107,8 @@
             // console.log("Add to cart");
             var cart = $('.fa-shopping-bag');
             var imgtodrag = $(this).closest('div[class^="card h-100"]').find("img").eq(0);
-            // console.log(imgtodrag);
+            var productId = $(this).closest('div[class^="card h-100"]').find("input").eq(0).val();
+            console.log(productId);
             if (imgtodrag) {
                 var imgclone = imgtodrag.clone()
                     .offset({
@@ -134,7 +135,7 @@
                     //     times: 2,
                     //     direction: 'up'
                     // }, 200);
-                    $('#CartCount').text(cartCounter++);
+                    $('#CartCount').text(++cartCounter);
                 }, 1500);
 
                 imgclone.animate({
@@ -149,7 +150,9 @@
             $.ajax({
                 type: "POST",
                 url: '/cart/add',
-                data: 'data',
+                data: {
+                    productId: productId
+                },
                 success: function (data, status, xhr) {
                     console.log(data);
                     console.log(status);

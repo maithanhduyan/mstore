@@ -3,15 +3,31 @@
  */
 package com.mstore.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.mstore.services.ProductCategoryService;
+import com.mstore.services.ProductService;
 
 @Controller
-@RequestMapping(value = "/cart")
 public class ShoppingCartController {
+	private static final Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
 
-	@RequestMapping(value = {"/",".html"})
-	public String viewCart() {
+	@Autowired
+	ProductService productService;
+
+	@Autowired
+	ProductCategoryService productCategoryService;
+
+	@RequestMapping(value = "/cart.html", method = RequestMethod.GET)
+	public String viewCart(Model model) {
+		model.addAttribute("message", "Mini Store");
+		model.addAttribute("productCategories", productCategoryService.findAll());
 		return "shopping_cart";
 	}
 }

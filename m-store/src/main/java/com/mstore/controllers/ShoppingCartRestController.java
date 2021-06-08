@@ -23,7 +23,6 @@ import com.mstore.entities.ShoppingCartItem;
 import com.mstore.repositories.humanresource.UserRepository;
 
 @RestController
-@RequestMapping(value = "/cart")
 public class ShoppingCartRestController {
 
 	private static final Logger log = LoggerFactory.getLogger(ShoppingCartRestController.class);
@@ -35,7 +34,7 @@ public class ShoppingCartRestController {
 
 	// http://localhost:8080/cart/add
 	@CrossOrigin(origins = "http://localhost:8080")
-	@RequestMapping(value = "/add", method = RequestMethod.POST, //
+	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, //
 			// consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, //
 			produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseStatus(value = HttpStatus.OK)

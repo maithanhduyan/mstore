@@ -431,8 +431,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		// Shoes 1
 		Product shoes1 = new Product();
 		shoes1.setId("e9254332-4ac6-4638-9624-6234d8aa72ab");
-		shoes1.setName(
-				"SAGUARO Barefoot Running Shoes, Portable, Fitness Shoes, Flexible, Ultra Lightweight, Breathable");
+		shoes1.setName("SAGUARO Barefoot Running Shoes, Portable, Fitness Shoes, Ultra Lightweight, Breathable");
 		shoes1.setCode("CODE-" + new Random().nextInt(200000));
 		shoes1.setBadge(badges[new Random().nextInt(2)]);
 		int costShoes1 = new Random().nextInt(200000);
@@ -455,8 +454,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		// Shoes 2
 		Product shoes2 = new Product();
 		shoes2.setId("534cf7ac-97f0-49fd-8eac-a5ca3d282631");
-		shoes2.setName(
-				"WEIDANSIER 2018 Running Shoes, Men's, Shoes, Sneakers, Shoes, Colorful, Air, Lightweight, Easy to Wear, Sporty, High-tech Marathon, Air Sole, Jogging, Walking, Green, Orange, Purple, Red, Autumn, Winter");
+		shoes2.setName("WEIDANSIER 2018 Running Shoes, Men's Winter");
 		shoes2.setCode("CODE-" + new Random().nextInt(200000));
 		shoes2.setBadge(badges[new Random().nextInt(2)]);
 		int costShoes2 = new Random().nextInt(2000000);
@@ -520,19 +518,21 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		menWatch1.setCreatedDate(new Date());
 		menWatch1.setSubCategory(productSubCategoryRepository.getOne("59595a8b-8d9e-4c34-a2d9-83b6bdf55352"));
 		this.productRepository.save(menWatch1);
-		
+
 		// Watch 3
 		Product womenWatch1 = new Product();
 		womenWatch1.setId("e479642f-3b8a-4fb5-befe-ea25254b530d");
-		womenWatch1.setName("Hannah Martin Women's Quartz Wristwatch, Stylish, Classic, Simple, For Business, Made in Japan, Bangle Bracelet Watch for Women");
+		womenWatch1.setName("Hannah Martin Women's Quartz Wristwatch, Bangle Bracelet Watch for Women");
 		womenWatch1.setCode("CODE-" + new Random().nextInt(20000));
 		womenWatch1.setBadge(badges[new Random().nextInt(2)]);
 		int costwomenWatch1 = 5200000;
 		womenWatch1.setCostPrice(costwomenWatch1);
 		womenWatch1.setSku("WMWAT-01");
-		womenWatch1.setImageURL("/assets/product/" + "Hannah_Martin_Womens_Quartz_Wristwatch_Stylish_Classic_Simple_For_Business_Made_in_Japan_Bangle_Bracelet_Watch_for_Women.jpg");
+		womenWatch1.setImageURL("/assets/product/"
+				+ "Hannah_Martin_Womens_Quartz_Wristwatch_Stylish_Classic_Simple_For_Business_Made_in_Japan_Bangle_Bracelet_Watch_for_Women.jpg");
 		womenWatch1.setLinkURL("http://localhost:8080/assets/product/" + womenWatch1.getId());
-		womenWatch1.setDescription("Đồng hồ đeo tay thạch anh cho nữ Hannah Martin, Kiểu dáng, Cổ điển, Đơn giản, Dành cho Doanh nhân, Sản xuất tại Nhật Bản, Đồng hồ đeo tay cho nữ");
+		womenWatch1.setDescription(
+				"Đồng hồ đeo tay thạch anh cho nữ Hannah Martin, Kiểu dáng, Cổ điển, Đơn giản, Dành cho Doanh nhân, Sản xuất tại Nhật Bản, Đồng hồ đeo tay cho nữ");
 		int salewomenWatch1 = costwomenWatch1 + (costwomenWatch1 * 30 / 100);
 		womenWatch1.setSalePrice(salewomenWatch1);
 		womenWatch1.setPromoPrice(salewomenWatch1 - (salewomenWatch1 * new Random().nextInt(20) / 100));
