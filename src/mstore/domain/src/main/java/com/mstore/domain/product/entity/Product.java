@@ -30,7 +30,7 @@ public class Product implements Serializable {
 	private String code;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SUB_CATEGORY_ID", foreignKey = @ForeignKey(name = "PRODUCT_PRODUCT_SUB_CATEGORY_FK"))
+	@JoinColumn(name = "SUB_CATEGORY_ID")
 	private ProductSubCategory subCategory;
 
 	@Column(name = "COST_PRICE")

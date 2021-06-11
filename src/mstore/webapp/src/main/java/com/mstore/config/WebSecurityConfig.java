@@ -8,13 +8,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.mstore.domain.user.service.impl.UserDetailsServiceImpl;
+import com.mstore.domain.system.service.AccountDetailsService;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	AccountDetailsService accountDetailsService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Setting Service to find User in the database.
 		// And Setting PassswordEncoder
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(accountDetailsService).passwordEncoder(passwordEncoder());
 
 	}
 

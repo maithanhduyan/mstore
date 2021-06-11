@@ -1,4 +1,4 @@
-package com.mstore.domain.humanresource.entity;
+package com.mstore.domain.system.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,30 +11,20 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "EMPLOYEE")
-public class Employee implements Serializable {
+@Table(name = "COMPANY")
+public class Company implements Serializable {
 
-	private static final long serialVersionUID = 7641822580130994913L;
+	private static final long serialVersionUID = -5241327163515811361L;
 
 	@Id
-	@Column(name = "ID", nullable = false)
+	@Column(name = "ID")
 	private String id;
 
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "FULL_NAME", length = 128, nullable = false)
-	private String fullName;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "HIRE_DATE", nullable = false)
-	private Date hireDate;
-
-	@Column(name = "CREATED_BY")
-	private String createdBy;
-
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
+	@Column(name = "BRAND")
+	private String brand;
 
 	@Column(name = "CREATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -43,7 +33,8 @@ public class Employee implements Serializable {
 	@Column(name = "UPDATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
-	public Employee() {
+
+	public Company() {
 	}
 
 	public String getId() {
@@ -62,20 +53,12 @@ public class Employee implements Serializable {
 		this.name = name;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public Date getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public Date getCreatedDate() {
@@ -96,8 +79,8 @@ public class Employee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", fullName=" + fullName + ", hireDate=" + hireDate
-				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+		return "Company [id=" + id + ", name=" + name + ", brand=" + brand + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + "]";
 	}
 
 }

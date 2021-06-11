@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mstore.domain.customer.repository.CustomerCommandRepository;
-import com.mstore.domain.customer.repository.CustomerRepository;
-import com.mstore.domain.customer.service.CustomerService;
+import com.mstore.domain.sales.repository.CustomerCommandRepository;
+import com.mstore.domain.sales.repository.CustomerRepository;
+import com.mstore.domain.sales.service.CustomerService;
 
 @Controller
 public class CustomerController {

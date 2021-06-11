@@ -26,8 +26,8 @@ import com.mstore.domain.shared.repository.CurrencyRepository;
 import com.mstore.domain.shared.service.AppService;
 import com.mstore.domain.shop.entity.Shop;
 import com.mstore.domain.shop.repository.ShopRepository;
-import com.mstore.domain.user.entity.User;
-import com.mstore.domain.user.repository.UserRepository;
+import com.mstore.domain.system.entity.Account;
+import com.mstore.domain.system.repository.AccountRepository;
 
 @Component
 @PropertySource("classpath:shop.properties")
@@ -55,7 +55,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 	CurrencyRepository currencyRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	AccountRepository accountRepository;
 
 	@Autowired
 	ShopRepository shopRepository;
@@ -332,7 +332,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 			p.setInStock(5);
 			p.setCreatedBy("SYSTEM");
 			p.setCreatedDate(new Date());
-			p.setSubCategory(productSubCategoryRepository.getOne("63b87ec1-31c0-468c-aed7-d09dadc6630a"));
+			p.setSubCategory(productSubCategoryRepository.findById("63b87ec1-31c0-468c-aed7-d09dadc6630a").orElse(null));
 			this.productRepository.save(p);
 		}
 
@@ -356,7 +356,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes1.setInStock(5);
 		clothes1.setCreatedBy("SYSTEM");
 		clothes1.setCreatedDate(new Date());
-		clothes1.setSubCategory(productSubCategoryRepository.getOne("0c413052-6cb7-41cb-9fe6-41506bee173c"));
+		clothes1.setSubCategory(productSubCategoryRepository.findById("0c413052-6cb7-41cb-9fe6-41506bee173c").orElse(null));
 		this.productRepository.save(clothes1);
 
 		// Clothes 2
@@ -378,7 +378,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes2.setInStock(5);
 		clothes2.setCreatedBy("SYSTEM");
 		clothes2.setCreatedDate(new Date());
-		clothes2.setSubCategory(productSubCategoryRepository.getOne("0c413052-6cb7-41cb-9fe6-41506bee173c"));
+		clothes2.setSubCategory(productSubCategoryRepository.findById("0c413052-6cb7-41cb-9fe6-41506bee173c").orElse(null));
 		this.productRepository.save(clothes2);
 
 		// Clothes 3
@@ -400,7 +400,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes3.setInStock(5);
 		clothes3.setCreatedBy("SYSTEM");
 		clothes3.setCreatedDate(new Date());
-		clothes3.setSubCategory(productSubCategoryRepository.getOne("23d4e981-a5a2-472e-950a-148c6276f8c6"));
+		clothes3.setSubCategory(productSubCategoryRepository.findById("23d4e981-a5a2-472e-950a-148c6276f8c6").orElse(null));
 		this.productRepository.save(clothes3);
 
 		// Clothes 4
@@ -422,7 +422,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes4.setInStock(5);
 		clothes4.setCreatedBy("SYSTEM");
 		clothes4.setCreatedDate(new Date());
-		clothes4.setSubCategory(productSubCategoryRepository.getOne("23d4e981-a5a2-472e-950a-148c6276f8c6"));
+		clothes4.setSubCategory(productSubCategoryRepository.findById("23d4e981-a5a2-472e-950a-148c6276f8c6").orElse(null));
 		this.productRepository.save(clothes4);
 
 		// Shoes 1
@@ -445,7 +445,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		shoes1.setInStock(5);
 		shoes1.setCreatedBy("SYSTEM");
 		shoes1.setCreatedDate(new Date());
-		shoes1.setSubCategory(productSubCategoryRepository.getOne("d9c23515-512c-49fb-b280-9abbaebe7b57"));
+		shoes1.setSubCategory(productSubCategoryRepository.findById("d9c23515-512c-49fb-b280-9abbaebe7b57").orElse(null));
 		this.productRepository.save(shoes1);
 
 		// Shoes 2
@@ -468,7 +468,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		shoes2.setInStock(5);
 		shoes2.setCreatedBy("SYSTEM");
 		shoes2.setCreatedDate(new Date());
-		shoes2.setSubCategory(productSubCategoryRepository.getOne("5a6e2cb8-0c48-4ee6-9b62-e8a10af6be7e"));
+		shoes2.setSubCategory(productSubCategoryRepository.findById("5a6e2cb8-0c48-4ee6-9b62-e8a10af6be7e").orElse(null));
 		this.productRepository.save(shoes2);
 
 		// Watch 1
@@ -491,7 +491,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		smartWatch1.setInStock(5);
 		smartWatch1.setCreatedBy("SYSTEM");
 		smartWatch1.setCreatedDate(new Date());
-		smartWatch1.setSubCategory(productSubCategoryRepository.getOne("3314f336-b377-40b7-8b36-e75ef70fd99f"));
+		smartWatch1.setSubCategory(productSubCategoryRepository.findById("3314f336-b377-40b7-8b36-e75ef70fd99f").orElse(null));
 		this.productRepository.save(smartWatch1);
 
 		// Watch 2
@@ -513,7 +513,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		menWatch1.setInStock(5);
 		menWatch1.setCreatedBy("SYSTEM");
 		menWatch1.setCreatedDate(new Date());
-		menWatch1.setSubCategory(productSubCategoryRepository.getOne("59595a8b-8d9e-4c34-a2d9-83b6bdf55352"));
+		menWatch1.setSubCategory(productSubCategoryRepository.findById("59595a8b-8d9e-4c34-a2d9-83b6bdf55352").orElse(null));
 		this.productRepository.save(menWatch1);
 
 		// Watch 3
@@ -537,7 +537,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		womenWatch1.setInStock(5);
 		womenWatch1.setCreatedBy("SYSTEM");
 		womenWatch1.setCreatedDate(new Date());
-		womenWatch1.setSubCategory(productSubCategoryRepository.getOne("e1f026a5-fd5f-4464-bb19-f4353b3f1ec0"));
+		womenWatch1.setSubCategory(productSubCategoryRepository.findById("e1f026a5-fd5f-4464-bb19-f4353b3f1ec0").orElse(null));
 		this.productRepository.save(womenWatch1);
 
 		Long duration = System.currentTimeMillis() - start;
@@ -566,13 +566,13 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 	}
 
 	int insertUserDataSample() {
-		User user = new User();
-		user.setId("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9");
-		user.setUsername("admin");
-		user.setPassword("password");
-		user.setCreatedDate(new Date());
-		user.setActive(1);
-		this.userRepository.save(user);
+		Account account = new Account();
+		account.setId("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9");
+		account.setUserName("admin");
+		account.setEncryptPassword("password");
+		account.setCreatedDate(new Date());
+		account.setActive(1);
+		this.accountRepository.save(account);
 		return 1;
 	}
 

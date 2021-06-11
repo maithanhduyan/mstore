@@ -2,7 +2,7 @@ package com.mstore.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.mstore.domain.order.model.CartInfo;
+import com.mstore.domain.sales.model.CartInfo;
 
 public class Utils {
 
