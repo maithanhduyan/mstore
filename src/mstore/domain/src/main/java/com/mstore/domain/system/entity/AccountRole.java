@@ -42,6 +42,17 @@ public class AccountRole implements Serializable {
 	public AccountRole() {
 	}
 
+	private static AccountRole instance;
+
+	public static AccountRole getInstance() {
+		if (instance == null) {
+			synchronized (AccountRole.class) {
+				instance = new AccountRole();
+			}
+		}
+		return instance;
+	}
+
 	public String getId() {
 		return id;
 	}

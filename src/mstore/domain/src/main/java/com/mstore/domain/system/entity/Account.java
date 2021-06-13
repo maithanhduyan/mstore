@@ -47,6 +47,17 @@ public class Account implements Serializable {
 	public Account() {
 	}
 
+	private static Account instance;
+
+	public static Account getInstance() {
+		if (instance == null) {
+			synchronized (Account.class) {
+				instance = new Account();
+			}
+		}
+		return instance;
+	}
+
 	public String getId() {
 		return id;
 	}

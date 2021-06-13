@@ -33,6 +33,17 @@ public class Role implements Serializable {
 	public Role() {
 	}
 
+	private static Role instance;
+
+	public static Role getInstance() {
+		if (instance == null) {
+			synchronized (Role.class) {
+				instance = new Role();
+			}
+		}
+		return instance;
+	}
+
 	public String getId() {
 		return id;
 	}

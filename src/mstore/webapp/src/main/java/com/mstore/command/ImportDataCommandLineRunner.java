@@ -21,18 +21,26 @@ import com.mstore.domain.product.entity.ProductSubCategory;
 import com.mstore.domain.product.repository.ProductCategoryRepository;
 import com.mstore.domain.product.repository.ProductRepository;
 import com.mstore.domain.product.repository.ProductSubCategoryRepository;
+import com.mstore.domain.sales.entity.Shop;
+import com.mstore.domain.sales.repository.ShopRepository;
 import com.mstore.domain.shared.entity.Currency;
 import com.mstore.domain.shared.repository.CurrencyRepository;
 import com.mstore.domain.shared.service.AppService;
-import com.mstore.domain.shop.entity.Shop;
-import com.mstore.domain.shop.repository.ShopRepository;
+import com.mstore.domain.shared.utils.IDUtil;
+import com.mstore.domain.shared.utils.PasswordUtil;
 import com.mstore.domain.system.entity.Account;
+import com.mstore.domain.system.entity.AccountRole;
+import com.mstore.domain.system.entity.Company;
+import com.mstore.domain.system.entity.Role;
 import com.mstore.domain.system.repository.AccountRepository;
+import com.mstore.domain.system.repository.AccountRoleRepository;
+import com.mstore.domain.system.repository.CompanyRepository;
+import com.mstore.domain.system.repository.RoleRepository;
 
 @Component
 @PropertySource("classpath:shop.properties")
 public class ImportDataCommandLineRunner implements CommandLineRunner {
-	private static final Logger log = LoggerFactory.getLogger(ImportDataCommandLineRunner.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ImportDataCommandLineRunner.class);
 
 	private static String DOMAIN_NAME = (String) AppService.context.get("domain.name");
 
@@ -60,6 +68,15 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 	@Autowired
 	ShopRepository shopRepository;
 
+	@Autowired
+	CompanyRepository companyRepository;
+
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@Autowired 
+	AccountRoleRepository accountRoleRepository;
+
 	// Shop properties
 	@Value("${shop.name}")
 	private String shopName;
@@ -67,27 +84,85 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		for (int i = 0; i < args.length; i++) {
-			log.info(args[i].toString());
+			LOG.info(args[i].toString());
 			if (args[i].toString().equalsIgnoreCase("--DataSample=true")) {
-				// 1
+				//
+				insertCompanyDataSample();
 				insertUserDataSample();
+				insertRoleDataSample();
+				insertAccountRoleDataSample();
+
 				insertProductCategoryDataSample();
 				insertProductSubCategoryDataSample();
-				// 2
+				//
 				insertProductDataSample();
-				// 3
+				//
 				insertEmployeeDataSample();
-				// 4
+				//
 				insertUserDataSample();
-				// 5
+				//
 				insertCurrencyDataSample();
-				// 6
+				//
 				insertShopDataSample();
 
 				break;
 			}
 
 		}
+	}
+
+	int insertAccountRoleDataSample() {
+		AccountRole accountRole = AccountRole.getInstance();
+		accountRole.setId("287c254d-1ac3-4e06-be8b-f10c489187db");
+		accountRole.setRole(roleRepository.getById("62c7598a-4c7d-4a48-92c1-b6b8d37708df"));
+		accountRole.setAccount(accountRepository.getById("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9"));
+		accountRole.setCreatedDate(new Date());
+		accountRoleRepository.save(accountRole);
+
+		return 1;
+	}
+
+	int insertRoleDataSample() {
+
+		Role admin = Role.getInstance();
+		admin.setId("62c7598a-4c7d-4a48-92c1-b6b8d37708df");
+		admin.setName("ADMIN");
+		admin.setDescription("ADMIN");
+		admin.setCreatedDate(new Date());
+		roleRepository.save(admin);
+
+		Role guest = Role.getInstance();
+		guest.setId("b20d6ded-5338-4745-a9b9-360ff3ff5302");
+		guest.setName("GUEST");
+		guest.setDescription("GUEST");
+		guest.setCreatedDate(new Date());
+		roleRepository.save(guest);
+
+		Role shopManager = Role.getInstance();
+		shopManager.setId("4d2f1c57-e34e-4bda-8e46-f212f0e463a6");
+		shopManager.setName("SHOP-MANAGER");
+		shopManager.setDescription("SHOP MANAGER");
+		shopManager.setCreatedDate(new Date());
+		roleRepository.save(shopManager);
+
+		Role cashier = Role.getInstance();
+		cashier.setId("49efeef0-8099-4bf6-8d4f-248f05e695fe");
+		cashier.setName("CASHIER");
+		cashier.setDescription("CASHIER");
+		cashier.setCreatedDate(new Date());
+		roleRepository.save(cashier);
+
+		return 1;
+	}
+
+	int insertCompanyDataSample() {
+		Company company = Company.getInstance();
+		company.setId("fe932c25-e9f9-4f97-bb38-fe5a9f3bedf0");
+		company.setName("MSTORE");
+		company.setBrand("MSTORE");
+		company.setCreatedDate(new Date());
+		companyRepository.save(company);
+		return 1;
 	}
 
 	int insertProductCategoryDataSample() {
@@ -332,7 +407,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 			p.setInStock(5);
 			p.setCreatedBy("SYSTEM");
 			p.setCreatedDate(new Date());
-			p.setSubCategory(productSubCategoryRepository.findById("63b87ec1-31c0-468c-aed7-d09dadc6630a").orElse(null));
+			p.setSubCategory(
+					productSubCategoryRepository.findById("63b87ec1-31c0-468c-aed7-d09dadc6630a").orElse(null));
 			this.productRepository.save(p);
 		}
 
@@ -356,7 +432,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes1.setInStock(5);
 		clothes1.setCreatedBy("SYSTEM");
 		clothes1.setCreatedDate(new Date());
-		clothes1.setSubCategory(productSubCategoryRepository.findById("0c413052-6cb7-41cb-9fe6-41506bee173c").orElse(null));
+		clothes1.setSubCategory(
+				productSubCategoryRepository.findById("0c413052-6cb7-41cb-9fe6-41506bee173c").orElse(null));
 		this.productRepository.save(clothes1);
 
 		// Clothes 2
@@ -378,7 +455,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes2.setInStock(5);
 		clothes2.setCreatedBy("SYSTEM");
 		clothes2.setCreatedDate(new Date());
-		clothes2.setSubCategory(productSubCategoryRepository.findById("0c413052-6cb7-41cb-9fe6-41506bee173c").orElse(null));
+		clothes2.setSubCategory(
+				productSubCategoryRepository.findById("0c413052-6cb7-41cb-9fe6-41506bee173c").orElse(null));
 		this.productRepository.save(clothes2);
 
 		// Clothes 3
@@ -400,7 +478,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes3.setInStock(5);
 		clothes3.setCreatedBy("SYSTEM");
 		clothes3.setCreatedDate(new Date());
-		clothes3.setSubCategory(productSubCategoryRepository.findById("23d4e981-a5a2-472e-950a-148c6276f8c6").orElse(null));
+		clothes3.setSubCategory(
+				productSubCategoryRepository.findById("23d4e981-a5a2-472e-950a-148c6276f8c6").orElse(null));
 		this.productRepository.save(clothes3);
 
 		// Clothes 4
@@ -422,7 +501,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		clothes4.setInStock(5);
 		clothes4.setCreatedBy("SYSTEM");
 		clothes4.setCreatedDate(new Date());
-		clothes4.setSubCategory(productSubCategoryRepository.findById("23d4e981-a5a2-472e-950a-148c6276f8c6").orElse(null));
+		clothes4.setSubCategory(
+				productSubCategoryRepository.findById("23d4e981-a5a2-472e-950a-148c6276f8c6").orElse(null));
 		this.productRepository.save(clothes4);
 
 		// Shoes 1
@@ -445,7 +525,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		shoes1.setInStock(5);
 		shoes1.setCreatedBy("SYSTEM");
 		shoes1.setCreatedDate(new Date());
-		shoes1.setSubCategory(productSubCategoryRepository.findById("d9c23515-512c-49fb-b280-9abbaebe7b57").orElse(null));
+		shoes1.setSubCategory(
+				productSubCategoryRepository.findById("d9c23515-512c-49fb-b280-9abbaebe7b57").orElse(null));
 		this.productRepository.save(shoes1);
 
 		// Shoes 2
@@ -468,7 +549,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		shoes2.setInStock(5);
 		shoes2.setCreatedBy("SYSTEM");
 		shoes2.setCreatedDate(new Date());
-		shoes2.setSubCategory(productSubCategoryRepository.findById("5a6e2cb8-0c48-4ee6-9b62-e8a10af6be7e").orElse(null));
+		shoes2.setSubCategory(
+				productSubCategoryRepository.findById("5a6e2cb8-0c48-4ee6-9b62-e8a10af6be7e").orElse(null));
 		this.productRepository.save(shoes2);
 
 		// Watch 1
@@ -491,7 +573,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		smartWatch1.setInStock(5);
 		smartWatch1.setCreatedBy("SYSTEM");
 		smartWatch1.setCreatedDate(new Date());
-		smartWatch1.setSubCategory(productSubCategoryRepository.findById("3314f336-b377-40b7-8b36-e75ef70fd99f").orElse(null));
+		smartWatch1.setSubCategory(
+				productSubCategoryRepository.findById("3314f336-b377-40b7-8b36-e75ef70fd99f").orElse(null));
 		this.productRepository.save(smartWatch1);
 
 		// Watch 2
@@ -513,7 +596,8 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		menWatch1.setInStock(5);
 		menWatch1.setCreatedBy("SYSTEM");
 		menWatch1.setCreatedDate(new Date());
-		menWatch1.setSubCategory(productSubCategoryRepository.findById("59595a8b-8d9e-4c34-a2d9-83b6bdf55352").orElse(null));
+		menWatch1.setSubCategory(
+				productSubCategoryRepository.findById("59595a8b-8d9e-4c34-a2d9-83b6bdf55352").orElse(null));
 		this.productRepository.save(menWatch1);
 
 		// Watch 3
@@ -537,11 +621,12 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		womenWatch1.setInStock(5);
 		womenWatch1.setCreatedBy("SYSTEM");
 		womenWatch1.setCreatedDate(new Date());
-		womenWatch1.setSubCategory(productSubCategoryRepository.findById("e1f026a5-fd5f-4464-bb19-f4353b3f1ec0").orElse(null));
+		womenWatch1.setSubCategory(
+				productSubCategoryRepository.findById("e1f026a5-fd5f-4464-bb19-f4353b3f1ec0").orElse(null));
 		this.productRepository.save(womenWatch1);
 
 		Long duration = System.currentTimeMillis() - start;
-		log.debug("Insert Sample Product Data." + " (" + duration + "ms)");
+		LOG.debug("Insert Sample Product Data." + " (" + duration + "ms)");
 		return 1;
 	}
 
@@ -561,7 +646,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 			this.employeeRepository.save(employee);
 		}
 		Long duration = System.currentTimeMillis() - start;
-		log.debug("Insert Sample Data." + " (" + duration + "ms)");
+		LOG.debug("Insert Sample Data." + " (" + duration + "ms)");
 		return 1;
 	}
 
@@ -569,7 +654,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		Account account = new Account();
 		account.setId("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9");
 		account.setUserName("admin");
-		account.setEncryptPassword("password");
+		account.setEncryptPassword(PasswordUtil.encryt("password"));
 		account.setCreatedDate(new Date());
 		account.setActive(1);
 		this.accountRepository.save(account);
@@ -578,7 +663,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 
 	int insertShopDataSample() {
 		Shop shop = new Shop();
-		shop.setId(UUID.randomUUID().toString());
+		shop.setId("11623e31-d926-4bca-b5d5-ea5661994aa5");
 		shop.setName(shopName);
 		this.shopRepository.save(shop);
 		return 1;
@@ -698,7 +783,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		}
 
 		Long duration = System.currentTimeMillis() - start;
-		log.debug("Insert Sample Data." + " (" + duration + "ms)");
+		LOG.debug("Insert Sample Data." + " (" + duration + "ms)");
 		return 1;
 	}
 }

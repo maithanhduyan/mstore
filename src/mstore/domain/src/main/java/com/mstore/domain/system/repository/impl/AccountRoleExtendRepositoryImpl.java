@@ -26,7 +26,7 @@ public class AccountRoleExtendRepositoryImpl implements AccountRoleExtendReposit
 	@Override
 	public List<Role> findAllByAccountId(String accountId) {
 
-		String sql = "SELECT * FROM AccountRole accrole WHERE accrole.account.id =:accountId";
+		String sql = "SELECT ar.role FROM AccountRole ar WHERE ar.account.id = :accountId";
 
 		Query query = this.entityManager.createQuery(sql, Role.class);
 		query.setParameter("accountId", accountId);

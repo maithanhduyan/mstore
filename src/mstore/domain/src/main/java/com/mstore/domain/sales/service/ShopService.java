@@ -1,7 +1,7 @@
-package com.mstore.domain.shop.service;
+package com.mstore.domain.sales.service;
 
+import com.mstore.domain.sales.entity.Shop;
 import com.mstore.domain.shared.service.BaseService;
-import com.mstore.domain.shop.entity.Shop;
 
 public interface ShopService extends BaseService<Shop, String> {
 

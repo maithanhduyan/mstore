@@ -25,5 +25,6 @@
 	<modules>
 		<module>domain</module>
 		<module>webapp</module>
+		<module>adminapp</module>
 	</modules>
 </project>

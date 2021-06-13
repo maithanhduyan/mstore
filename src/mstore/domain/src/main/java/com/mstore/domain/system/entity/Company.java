@@ -37,6 +37,15 @@ public class Company implements Serializable {
 	public Company() {
 	}
 
+	private static Company instance;
+
+	public static Company getInstance() {
+		if (instance == null) {
+			instance = new Company();
+		}
+		return instance;
+	}
+
 	public String getId() {
 		return id;
 	}

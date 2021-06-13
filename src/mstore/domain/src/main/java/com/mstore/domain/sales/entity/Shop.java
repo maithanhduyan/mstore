@@ -1,4 +1,4 @@
-package com.mstore.domain.shop.entity;
+package com.mstore.domain.sales.entity;
 
 import java.io.Serializable;
 
@@ -20,6 +20,17 @@ public class Shop implements Serializable {
 	private String name;
 
 	public Shop() {
+	}
+
+	private static Shop instance;
+
+	public static Shop getInstance() {
+		if (instance == null) {
+			synchronized (Shop.class) {
+				instance = new Shop();
+			}
+		}
+		return instance;
 	}
 
 	public String getId() {
