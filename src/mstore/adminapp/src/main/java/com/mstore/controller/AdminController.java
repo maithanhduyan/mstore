@@ -19,7 +19,7 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = { "/", "dashboard.html", "dashboard", "index.html" })
+	@RequestMapping(value = { "/dashboard.html" })
 	public String viewDashBoard(HttpSession session) {
 		LOG.debug("DashBoard Endpoint");
 		LOG.info("SessionID: " + session.getId());
@@ -29,6 +29,11 @@ public class AdminController {
 	@RequestMapping(value = { "login", "login.html" })
 	public String viewLogin() {
 		return "view/system/login";
+	}
+
+	@RequestMapping(value = { "403" })
+	public String view403() {
+		return "error/403";
 	}
 
 	@RequestMapping(value = { "/admin/accountInfo" }, method = RequestMethod.GET)

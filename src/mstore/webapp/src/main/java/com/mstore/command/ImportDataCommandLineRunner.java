@@ -88,11 +88,15 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 			if (args[i].toString().equalsIgnoreCase("--DataSample=true")) {
 				//
 				insertCompanyDataSample();
+				
 				insertUserDataSample();
+				
 				insertRoleDataSample();
+				
 				insertAccountRoleDataSample();
 
 				insertProductCategoryDataSample();
+				
 				insertProductSubCategoryDataSample();
 				//
 				insertProductDataSample();
@@ -110,51 +114,7 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 
 		}
 	}
-
-	int insertAccountRoleDataSample() {
-		AccountRole accountRole = AccountRole.getInstance();
-		accountRole.setId("287c254d-1ac3-4e06-be8b-f10c489187db");
-		accountRole.setRole(roleRepository.getById("62c7598a-4c7d-4a48-92c1-b6b8d37708df"));
-		accountRole.setAccount(accountRepository.getById("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9"));
-		accountRole.setCreatedDate(new Date());
-		accountRoleRepository.save(accountRole);
-
-		return 1;
-	}
-
-	int insertRoleDataSample() {
-
-		Role admin = Role.getInstance();
-		admin.setId("62c7598a-4c7d-4a48-92c1-b6b8d37708df");
-		admin.setName("ADMIN");
-		admin.setDescription("ADMIN");
-		admin.setCreatedDate(new Date());
-		roleRepository.save(admin);
-
-		Role guest = Role.getInstance();
-		guest.setId("b20d6ded-5338-4745-a9b9-360ff3ff5302");
-		guest.setName("GUEST");
-		guest.setDescription("GUEST");
-		guest.setCreatedDate(new Date());
-		roleRepository.save(guest);
-
-		Role shopManager = Role.getInstance();
-		shopManager.setId("4d2f1c57-e34e-4bda-8e46-f212f0e463a6");
-		shopManager.setName("SHOP-MANAGER");
-		shopManager.setDescription("SHOP MANAGER");
-		shopManager.setCreatedDate(new Date());
-		roleRepository.save(shopManager);
-
-		Role cashier = Role.getInstance();
-		cashier.setId("49efeef0-8099-4bf6-8d4f-248f05e695fe");
-		cashier.setName("CASHIER");
-		cashier.setDescription("CASHIER");
-		cashier.setCreatedDate(new Date());
-		roleRepository.save(cashier);
-
-		return 1;
-	}
-
+	
 	int insertCompanyDataSample() {
 		Company company = Company.getInstance();
 		company.setId("fe932c25-e9f9-4f97-bb38-fe5a9f3bedf0");
@@ -162,6 +122,61 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		company.setBrand("MSTORE");
 		company.setCreatedDate(new Date());
 		companyRepository.save(company);
+		return 1;
+	}
+	
+	int insertUserDataSample() {
+		Account account = new Account();
+		account.setId("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9");
+		account.setUserName("admin");
+		account.setEncryptPassword(PasswordUtil.encryt("password"));
+		account.setCreatedDate(new Date());
+		account.setActive(1);
+		this.accountRepository.save(account);
+		return 1;
+	}
+	
+	int insertAccountRoleDataSample() {
+		AccountRole accountRole = AccountRole.getInstance();
+		accountRole.setId("287c254d-1ac3-4e06-be8b-f10c489187db");
+		accountRole.setRole(roleRepository.getById("62c7598a-4c7d-4a48-92c1-b6b8d37708df"));
+		accountRole.setAccount(accountRepository.getById("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9"));
+		accountRole.setCreatedDate(new Date());
+		accountRoleRepository.save(accountRole);
+		
+		return 1;
+	}
+
+	int insertRoleDataSample() {
+
+		Role admin = Role.getInstance();
+		admin.setId("62c7598a-4c7d-4a48-92c1-b6b8d37708df");
+		admin.setName("ROLE_ADMIN");
+		admin.setDescription("ADMIN");
+		admin.setCreatedDate(new Date());
+		roleRepository.save(admin);
+
+		Role guest = Role.getInstance();
+		guest.setId("b20d6ded-5338-4745-a9b9-360ff3ff5302");
+		guest.setName("ROLE_GUEST");
+		guest.setDescription("GUEST");
+		guest.setCreatedDate(new Date());
+		roleRepository.save(guest);
+
+		Role shopManager = Role.getInstance();
+		shopManager.setId("4d2f1c57-e34e-4bda-8e46-f212f0e463a6");
+		shopManager.setName("ROLE_SHOP-MANAGER");
+		shopManager.setDescription("SHOP MANAGER");
+		shopManager.setCreatedDate(new Date());
+		roleRepository.save(shopManager);
+
+		Role cashier = Role.getInstance();
+		cashier.setId("49efeef0-8099-4bf6-8d4f-248f05e695fe");
+		cashier.setName("ROLE_CASHIER");
+		cashier.setDescription("CASHIER");
+		cashier.setCreatedDate(new Date());
+		roleRepository.save(cashier);
+
 		return 1;
 	}
 
@@ -650,16 +665,6 @@ public class ImportDataCommandLineRunner implements CommandLineRunner {
 		return 1;
 	}
 
-	int insertUserDataSample() {
-		Account account = new Account();
-		account.setId("43c89fd9-ebcb-481a-bd54-4e4cbdf07dd9");
-		account.setUserName("admin");
-		account.setEncryptPassword(PasswordUtil.encryt("password"));
-		account.setCreatedDate(new Date());
-		account.setActive(1);
-		this.accountRepository.save(account);
-		return 1;
-	}
 
 	int insertShopDataSample() {
 		Shop shop = new Shop();

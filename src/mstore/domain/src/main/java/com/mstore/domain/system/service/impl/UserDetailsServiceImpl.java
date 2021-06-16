@@ -10,18 +10,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.mstore.domain.shared.utils.PasswordUtil;
 import com.mstore.domain.system.entity.Account;
 import com.mstore.domain.system.entity.Role;
 import com.mstore.domain.system.repository.AccountRepository;
 import com.mstore.domain.system.repository.AccountRoleExtendRepository;
-import com.mstore.domain.system.service.AccountDetailsService;
 
 @Service
-public class AccountDetailsServiceImpl implements AccountDetailsService {
-	private static final Logger LOG = LoggerFactory.getLogger(AccountDetailsServiceImpl.class);
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+	private static final Logger LOG = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
 	@Autowired
 	AccountRepository accountRepository;
@@ -37,21 +39,21 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		}
 
 		List<Role> roleList = this.accountRoleExtendRepository.findAllByAccountId(account.getId());
-
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-		if (roleList != null) {
-			for (Role role : roleList) {
-				GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
-				grantList.add(authority);
-			}
+
+		GrantedAuthority authority;
+
+		for (Role role : roleList) {
+			authority = new SimpleGrantedAuthority("ROLE_ADMIN");
+			grantList.add(authority);
 		}
 
-		boolean enabled = account.getActive() == 1 ? true : false;
+		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
-		UserDetails userDetails = (UserDetails) new User("admin", //
-				"password", enabled, accountNonExpired, //
+		UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
+				account.getEncryptPassword(), enabled, accountNonExpired, //
 				credentialsNonExpired, accountNonLocked, grantList);
 		return userDetails;
 	}
