@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
+	
 	private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
 
 	public AdminController() {
@@ -26,17 +28,7 @@ public class AdminController {
 		return "dashboard";
 	}
 
-	@RequestMapping(value = { "login", "login.html" })
-	public String viewLogin() {
-		return "view/system/login";
-	}
-
-	@RequestMapping(value = { "403" })
-	public String view403() {
-		return "error/403";
-	}
-
-	@RequestMapping(value = { "/admin/accountInfo" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/accountInfo" }, method = RequestMethod.GET)
 	public String accountInfo(Model model) {
 
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -44,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		GrantedAuthority authority;
 
 		for (Role role : roleList) {
-			authority = new SimpleGrantedAuthority("ROLE_ADMIN");
+			authority = new SimpleGrantedAuthority(role.getName());
 			grantList.add(authority);
 		}
 

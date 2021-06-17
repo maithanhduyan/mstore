@@ -14,6 +14,13 @@ public class Role implements Serializable {
 
 	private static final long serialVersionUID = 5657145333317528921L;
 
+	public static final String ADMIN = "ROLE_ADMIN";
+	public static final String MANAGER = "ROLE_MANAGER";
+	public static final String SHOP_MANAGER = "ROLE_SHOP_MANAGER";
+	public static final String GUEST = "ROLE_GUEST";
+	public static final String USER = "ROLE_USER";
+	public static final String CASHIER = "ROLE_CASHIER";
+
 	@Id
 	@Column(name = "ID")
 	private String id;

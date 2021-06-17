@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -24,7 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static Logger LOG = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-	private String[] baseURL = { "/", "/assets/**", "/vendor/**", "/js/**", "/css/**", "/login" };
+	private static final String[] BASE_URL = { "/assets/**", "/vendor/**", "/js/**", "/css/**", "/login" };
+	private static final String[] ADMIN_URL = { "/admin/**" };
+
+	private static final String ROLE_ADMIN = "hasRole('ROLE_ADMIN')";
 
 	@Autowired
 	private DataSource dataSource;
@@ -34,16 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		LOG.info("Config Global AuthenticationManagerBuilder");
-
-		// Setting Service to find User in the database.
+		//LOG.info("Config Global AuthenticationManagerBuilder");
 		// And Setting PassswordEncoder
-		auth.userDetailsService(userDetailsService).passwordEncoder(PasswordUtil.bCryptPasswordEncoder());
+		//auth.userDetailsService(userDetailsService).passwordEncoder(PasswordUtil.bCryptPasswordEncoder());
 
-		String password = "admin";
-
-		String encrytedPassword = PasswordUtil.encryt(password);
-		LOG.info("Encoded password of admin=" + encrytedPassword);
 	}
 
 	@Override
@@ -52,10 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		// The pages does not require login
-		http.authorizeRequests().antMatchers(baseURL).permitAll();
+		http.authorizeRequests().antMatchers(BASE_URL).permitAll();
 
 		// For ADMIN only.
-		http.authorizeRequests().antMatchers("/dashboard.html").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers(ADMIN_URL).access(ROLE_ADMIN);
 
 		// When the user has logged in as XX.
 		// But access a page that requires role YY,
@@ -67,16 +63,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Submit URL of login page.
 				.loginProcessingUrl("/j_spring_security_check") // Submit URL
 				.loginPage("/login")//
-				.defaultSuccessUrl("/dashboard.html")//
+				.defaultSuccessUrl("/admin/dashboard.html")//
 				.failureUrl("/login?error=true")//
 				.usernameParameter("username")//
 				.passwordParameter("password")
 				// Config for Logout Page
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/login");
+				.and().logout().logoutUrl("/logout") //
+				.invalidateHttpSession(true) //
+				.deleteCookies("JSESSIONID") //
+				.logoutSuccessUrl("/login");
 
 		// Config Remember Me.
 		http.authorizeRequests().and() //
-				.rememberMe().tokenRepository(this.persistentTokenRepository()) //
+				.rememberMe()
+				.rememberMeParameter("remember-me")
+				.key("uniqueAndSecret")
+				.tokenRepository(this.persistentTokenRepository()) //
+				.rememberMeCookieName("remember-me") // it is name of the cookie  
 				.tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
 	}
 
