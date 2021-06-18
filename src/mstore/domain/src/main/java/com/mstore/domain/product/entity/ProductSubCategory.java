@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "PRODUCT_SUB_CATEGORY")
 public class ProductSubCategory implements Serializable {

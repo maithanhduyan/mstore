@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+@Data
 @Entity
 @Table(name = "PRODUCT")
 public class Product implements Serializable {
@@ -263,5 +265,7 @@ public class Product implements Serializable {
 				+ inStock + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", createdDate=" + createdDate
 				+ ", updatedDate=" + updatedDate + "]";
 	}
+
+	
 
 }

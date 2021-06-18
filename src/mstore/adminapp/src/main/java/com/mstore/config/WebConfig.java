@@ -30,7 +30,6 @@ public class WebConfig implements WebMvcConfigurer {
 		// vendor
 		registry.addResourceHandler("/vendor/**") //
 				.addResourceLocations("classpath:/static/vendor/");
-
 	}
 
 	@Bean
@@ -47,6 +46,7 @@ public class WebConfig implements WebMvcConfigurer {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/api**").allowedOrigins("http://localhost:8080");
+				registry.addMapping("/api**").allowedOrigins("http://localhost:8888");
 			}
 		};
 	}
