@@ -116,7 +116,7 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", userName=" + userName + ", encryptPassword=" + encryptPassword + ", company="
+		return "Account [id=" + id + ", userName=" + userName + ", encryptPassword=" + "[PROTECTED]" + ", company="
 				+ company + ", active=" + active + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
 				+ "]";
 	}
