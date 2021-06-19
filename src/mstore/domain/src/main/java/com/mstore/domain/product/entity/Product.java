@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+@Data
 @Entity
 @Table(name = "PRODUCT")
 public class Product implements Serializable {
@@ -30,7 +31,7 @@ public class Product implements Serializable {
 	private String code;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SUB_CATEGORY_ID", foreignKey = @ForeignKey(name = "PRODUCT_PRODUCT_SUB_CATEGORY_FK"))
+	@JoinColumn(name = "SUB_CATEGORY_ID")
 	private ProductSubCategory subCategory;
 
 	@Column(name = "COST_PRICE")
@@ -264,5 +265,7 @@ public class Product implements Serializable {
 				+ inStock + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", createdDate=" + createdDate
 				+ ", updatedDate=" + updatedDate + "]";
 	}
+
+	
 
 }

@@ -30,6 +30,12 @@ public class Employee implements Serializable {
 	@Column(name = "HIRE_DATE", nullable = false)
 	private Date hireDate;
 
+	@Column(name = "CREATED_BY")
+	private String createdBy;
+
+	@Column(name = "UPDATED_BY")
+	private String updatedBy;
+
 	@Column(name = "CREATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
@@ -37,7 +43,6 @@ public class Employee implements Serializable {
 	@Column(name = "UPDATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
-
 	public Employee() {
 	}
 
