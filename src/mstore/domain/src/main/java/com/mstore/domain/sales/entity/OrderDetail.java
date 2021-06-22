@@ -34,7 +34,7 @@ public class OrderDetail implements Serializable {
 	private Product product;
 
 	@Column(name = "QUANTITY", nullable = false)
-	private int quanity;
+	private int quantity;
 
 	@Column(name = "PRICE", nullable = false)
 	private double price;
@@ -55,6 +55,18 @@ public class OrderDetail implements Serializable {
 	@Column(name = "UPDATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
+
+	private static OrderDetail _orderDetail = null;
+
+	public static OrderDetail getInstance() {
+		if (_orderDetail == null) {
+			// Using Thread safe for instance Product
+			synchronized (OrderDetail.class) {
+				_orderDetail = new OrderDetail();
+			}
+		}
+		return _orderDetail;
+	}
 
 	public String getId() {
 		return id;
@@ -80,12 +92,12 @@ public class OrderDetail implements Serializable {
 		this.product = product;
 	}
 
-	public int getQuanity() {
-		return quanity;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(int quanity) {
-		this.quanity = quanity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public double getPrice() {
@@ -97,7 +109,7 @@ public class OrderDetail implements Serializable {
 	}
 
 	public double getAmount() {
-		return amount;
+		return this.price * this.quantity;
 	}
 
 	public void setAmount(double amount) {
@@ -138,7 +150,7 @@ public class OrderDetail implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderDetail [id=" + id + ", order=" + order + ", product=" + product + ", quanity=" + quanity
+		return "OrderDetail [id=" + id + ", order=" + order + ", product=" + product + ", quanity=" + quantity
 				+ ", price=" + price + ", amount=" + amount + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy
 				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}

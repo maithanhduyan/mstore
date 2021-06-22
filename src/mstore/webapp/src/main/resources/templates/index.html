@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title th:utext="${message}"></title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
-    <!-- fontawesome -->
-    <link th:href="@{/vendor/font-awesome/css/all.min.css}" rel="stylesheet">
-    <!-- Bootstrap icons-->
-    <link th:href="@{/vendor/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link th:href="@{/css/styles.css}" rel="stylesheet" />
-    <!-- aos -->
-    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet">
-
-</head>
+	<!-- Header -->
+    <th:block th:include="layout/_header"></th:block>
 
 <body>
 
@@ -99,69 +83,6 @@
     <script th:src="@{/js/scripts.js}"></script>
     <th:block th:include="layout/_scripts"></th:block>
     <script type="text/javascript">
-
-        var cartCounter = 0;
-
-        // Add To Cart
-        $(".add-to-card").on("click", function () {
-            // console.log("Add to cart");
-            var cart = $('.fa-shopping-bag');
-            var imgtodrag = $(this).closest('div[class^="card h-100"]').find("img").eq(0);
-            var productId = $(this).closest('div[class^="card h-100"]').find("input").eq(0).val();
-            console.log(productId);
-            if (imgtodrag) {
-                var imgclone = imgtodrag.clone()
-                    .offset({
-                        top: imgtodrag.offset().top + 200,
-                        left: imgtodrag.offset().left
-                    })
-                    .css({
-                        'opacity': '0.9',
-                        'position': 'absolute',
-                        'height': '350px',
-                        'width': '350px',
-                        'z-index': '200'
-                    })
-                    .appendTo($('body'))
-                    .animate({
-                        'top': cart.offset().top + 10,
-                        'left': cart.offset().left + 10,
-                        'width': 75,
-                        'height': 75
-                    }, 1000, 'easeInOutCubic');
-
-                setTimeout(function () {
-                    // cart.effect("shake", {
-                    //     times: 2,
-                    //     direction: 'up'
-                    // }, 200);
-                    $('#CartCount').text(++cartCounter);
-                }, 1500);
-
-                imgclone.animate({
-                    'width': 0,
-                    'height': 0
-                }, function () {
-                    $(this).detach()
-                });
-            }
-            //console.log(imgtodrag);
-
-            $.ajax({
-                type: "POST",
-                url: '/cart/add',
-                data: {
-                    productId: productId
-                },
-                success: function (data, status, xhr) {
-                    console.log(data);
-                    console.log(status);
-                    console.log(xhr);
-                },
-                dataType: 'application/JSON'
-            });
-        });
-
 
     </script>
 </body>
