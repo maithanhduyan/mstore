@@ -39,7 +39,12 @@
       $("#header")
         .css("opacity", 0)
         .slideDown("slow")
-        .animate({ opacity: 1 }, { queue: false, duration: "slow" });
+        .animate({
+          opacity: 1
+        }, {
+          queue: false,
+          duration: "slow"
+        });
     } else {
       $("#header").removeClass("header-scrolled");
       $("#header").removeClass("stickyHeader");
@@ -61,8 +66,7 @@
   });
 
   $(".back-to-top").on("click", function () {
-    $("html, body").animate(
-      {
+    $("html, body").animate({
         scrollTop: 0,
       },
       800,
@@ -81,6 +85,7 @@
   var stompClient = null;
   var username = null;
   var sessionId = "JSESSIONID=23E11257ED1E3B8CAEBAC402FDBD0250";
+
   function connect() {
     username = "shopping-cart";
     var socket = new SockJS("/ws");
@@ -90,6 +95,7 @@
   }
   // Connect to WebSocket Server.
   connect();
+
   function onError(error) {
     console.log(
       "Could not connect to WebSocket server. Please refresh this page to try again!"
@@ -102,9 +108,11 @@
 
     // Tell your username to the server
     stompClient.send(
-      "/app/chat.addUser",
-      {},
-      JSON.stringify({ sender: username, type: "JOIN" })
+      "/app/chat.addUser", {},
+      JSON.stringify({
+        sender: username,
+        type: "JOIN"
+      })
     );
 
     //connectingElement.classList.add("hidden");
@@ -119,8 +127,7 @@
         type: "CHAT",
       };
       stompClient.send(
-        "/app/cart.sendMessage",
-        {},
+        "/app/cart.sendMessage", {},
         JSON.stringify(chatMessage)
       );
       messageInput.value = "";
@@ -175,8 +182,7 @@
           "z-index": "200",
         })
         .appendTo($("body"))
-        .animate(
-          {
+        .animate({
             top: cart.offset().top + 10,
             left: cart.offset().left + 10,
             width: 75,
@@ -187,15 +193,10 @@
         );
 
       setTimeout(function () {
-        // cart.effect("shake", {
-        //     times: 2,
-        //     direction: 'up'
-        // }, 200);
         fetchCartCounter();
       }, 1500);
 
-      imgclone.animate(
-        {
+      imgclone.animate({
           width: 0,
           height: 0,
         },
@@ -204,7 +205,6 @@
         }
       );
     }
-    //console.log(imgtodrag);
 
     $.ajax({
       type: "POST",
@@ -217,10 +217,7 @@
           console.log(data);
         }
       },
-      complete: function (xhr, textStatus) {
-        //console.log(xhr.status);
-        //console.log(textStatus);
-      },
+      complete: function (xhr, textStatus) {},
       dataType: "json",
     });
   });
@@ -249,14 +246,15 @@
     $.ajax({
       type: "POST",
       url: "/cart/getTotalAmount",
-      data: { command: "getTotalAmount" },
+      data: {
+        command: "getTotalAmount"
+      },
       success: function (data, textStatus, xhr) {
         if (xhr.status == 200 && textStatus == "success") {
           var totalAmount = new Intl.NumberFormat("vi-VN", {
             style: "currency",
             currency: "VND",
           }).format(data.totalAmount);
-          console.log(totalAmount);
           $(".temporary-amount").text(totalAmount);
           $(".total-amount").text(totalAmount);
         }
@@ -264,6 +262,70 @@
       complete: function (xhr, textStatus) {},
     });
   }
+
+  // increase quantity
+  $(".increase-quantity").on("click", function () {
+    var productId = $(this).parent().closest('div[class^="col-md-7"]').find("input").val();
+    var quantity = $(this).parent().find(".product-quantity");
+    var amount = $(this).parent().closest('div[class^="col-md-7"]').find("strong.amount");
+    $.ajax({
+      type: "POST",
+      url: "/cart/increaseQuantity",
+      data: {
+        command: "increaseQuantity",
+        productId: productId
+      },
+      success: function (data, textStatus, xhr) {
+        if (xhr.status == 200 && textStatus == "success") {
+          var amt = new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(data.amount);
+          quantity.text(data.quantity);
+          amount.text(amt);
+          fetchCartCounter();
+          fetchTotalAmount();
+        }
+      },
+      complete: function (xhr, textStatus) {},
+      dataType: "json"
+    });
+  });
+
+  //decrease quantity
+  $(".decrease-quantity").on("click", function () {
+    var productId = $(this).parent().closest('div[class^="col-md-7"]').find("input").val();
+    var quantity = $(this).parent().find(".product-quantity");
+    var amount = $(this).parent().closest('div[class^="col-md-7"]').find("strong.amount");
+    var productTag = $(this)
+      .parent()
+      .closest('div[class^="row mb-4 border-top"]');
+    $.ajax({
+      type: "POST",
+      url: "/cart/decreaseQuantity",
+      data: {
+        command: "decreaseQuantity",
+        productId: productId
+      },
+      success: function (data, textStatus, xhr) {
+        if (xhr.status == 200 && textStatus == "success") {
+          var amt = new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(data.amount);
+          quantity.text(data.quantity);
+          amount.text(amt);
+          if (data.quantity == 0) {
+            productTag.remove();
+          }
+          fetchCartCounter();
+          fetchTotalAmount();
+        }
+      },
+      complete: function () {},
+      dataType: "json"
+    });
+  });
 
   setInterval(function () {
     $("#CartCount").text(cartCounter);
@@ -280,8 +342,6 @@
     var productTag = $(this)
       .parent()
       .closest('div[class^="row mb-4 border-top"]');
-    console.log(productId);
-    console.log(productTag);
     $.ajax({
       type: "post",
       url: "/cart/remove",
@@ -291,13 +351,9 @@
       },
       success: function (data, textStatus, xhr) {
         if (xhr.status == 200 && textStatus == "success") {
-          console.log(data);
-          //cartCounter = data;
-          //$("#CartCount").text(cartCounter);
           fetchCartCounter();
           fetchTotalAmount();
           productTag.remove();
-          console.log("");
         }
       },
       complete: function (xhr, textStatus) {},

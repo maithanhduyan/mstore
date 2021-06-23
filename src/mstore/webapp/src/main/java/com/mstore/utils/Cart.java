@@ -62,7 +62,6 @@ public class Cart {
 				orderDetail.setAmount(orderDetail.getPrice() * orderDetail.getQuantity());
 				cartList.put(productId, orderDetail);
 			}
-			++counter;
 			// System.out.println(cartList);
 			cartList.forEach((k, v) -> System.out.println("Key:" + k + " V:" + v.toString()));
 		} catch (Exception ex) {
@@ -72,20 +71,46 @@ public class Cart {
 	}
 
 	public void removeProduct(String productId) {
-		OrderDetail orderDetail = cartList.get(productId);
-		this.counter = this.counter - orderDetail.getQuantity();
 		cartList.remove(productId);
 		getTotalAmount();
 
 	}
 
-	public int getCounter() {
-		return counter;
+	public void increaseQuantity(String productId) {
+		if (!productId.equalsIgnoreCase(null)) {
+			OrderDetail orderDetail = this.cartList.get(productId);
+			orderDetail.setQuantity(orderDetail.getQuantity() + 1);
+			getTotalAmount();
+		}
+	}
+	
+	public int decreaseQuantity(String productId) {
+		if (!productId.equalsIgnoreCase(null)) {
+			OrderDetail orderDetail = this.cartList.get(productId);
+			if(orderDetail.getQuantity() > 1) {
+				orderDetail.setQuantity(orderDetail.getQuantity() - 1);
+				return 1;
+			}else {
+				cartList.remove(productId);
+			}
+			getTotalAmount();
+		}
+		return 0;
 	}
 
-	public void setCounter(int counter) {
-		this.counter = counter;
+	public int getCounter() {
+		this.counter = 0;
+		if (cartList.size() > 0) {
+			LOG.info(" " + this.totalAmount);
+			cartList.forEach((k, v) -> this.counter += v.getQuantity());
+
+		} else {
+			return 0;
+		}
+		return this.counter;
 	}
+
+
 
 	public List<OrderDetail> getOrderDetails() {
 		List<OrderDetail> list = new ArrayList<OrderDetail>(cartList.values());
@@ -106,5 +131,9 @@ public class Cart {
 			return 0;
 		}
 		return this.totalAmount;
+	}
+
+	public OrderDetail getOrderDetailById(String productId) {
+		return cartList.get(productId);
 	}
 }

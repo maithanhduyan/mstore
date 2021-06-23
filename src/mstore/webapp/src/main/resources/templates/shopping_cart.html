@@ -33,10 +33,10 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-outline-dark  btn-sm"><i
+                                                <button type="button" class="btn btn-outline-dark  btn-sm decrease-quantity"><i
                                                         class="bi bi-dash"></i></button>
-                                                <button type="button" class="btn">[[${orderDetail.quantity}]]</button>
-                                                <button type="button" class="btn btn-outline-dark  btn-sm"><i
+                                                <button type="button" class="btn product-quantity">[[${orderDetail.quantity}]]</button>
+                                                <button type="button" class="btn btn-outline-dark  btn-sm increase-quantity"><i
                                                         class="bi bi-plus"></i></button>
                                             </div>
                                         </div>
@@ -44,7 +44,7 @@
                                     <div class="row mb-4">
                                     	<div class="col-md-4"><a class="btn btn-outline-dark  btn-sm remove-cart" ><i class="bi bi-trash"></i> Remove</a></div>
                                     	<div class="col-md-4"><a class="btn btn-outline-dark btn-sm"><i class="bi bi-heart"></i> Wish List</a></div>
-                                    	<div class="col-md-4"><strong>[[${#numbers.formatDecimal(orderDetail.amount, 0, 'COMMA', 0, 'POINT')+'&#8363;'}]]</strong></div>
+                                    	<div class="col-md-4"><strong class="amount">[[${#numbers.formatDecimal(orderDetail.amount, 0, 'COMMA', 0, 'POINT')+'&#8363;'}]]</strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
 				                        <p class="mb-0">(including VAT)</p>
 				                    </strong>
                                 </div>
-                                <div class="col-md-4"><strong th:text=" ${#numbers.formatDecimal(totalAmount, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">$53.98</strong></div>
+                                <div class="col-md-4"><strong class="total-amount" th:text=" ${#numbers.formatDecimal(totalAmount, 0, 'COMMA', 0, 'POINT')+'&#8363;'}">$53.98</strong></div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-12">

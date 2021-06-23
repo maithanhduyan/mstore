@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mstore.domain.product.repository.ProductRepository;
+import com.mstore.domain.sales.entity.OrderDetail;
 import com.mstore.domain.sales.entity.ShoppingCart;
 import com.mstore.domain.sales.entity.ShoppingCartItem;
 import com.mstore.utils.Cart;
@@ -35,7 +36,6 @@ public class ShoppingCartRestController {
 	@Autowired
 	Cart cart;
 
-	// http://localhost:8080/cart/add
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, //
 			produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseStatus(value = HttpStatus.OK)
@@ -45,10 +45,50 @@ public class ShoppingCartRestController {
 		cartItem = ShoppingCartItem.getInstance();
 		if (!productId.equalsIgnoreCase(null)) {
 			cart.addToCart(productId);
-			responseData.put("counter", "" + cart.getCounter());
+			responseData.put("counter", cart.getCounter());
 		}
-		LOG.info("Size cart: " + cart.getCounter());
 
+		return responseData;
+	}
+
+	@RequestMapping(value = "/cart/increaseQuantity", method = RequestMethod.POST, //
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseStatus(value = HttpStatus.OK)
+	public Map<String, Object> increase(@RequestParam HashMap<String, String> requestData) {
+		String productId = requestData.get("productId");
+		String command = requestData.get("command");
+		Map<String, Object> responseData = new HashMap<String, Object>();
+		if (!productId.equalsIgnoreCase(null) && command.equalsIgnoreCase("increaseQuantity")) {
+			cart.increaseQuantity(productId);
+			OrderDetail orderDetail = cart.getOrderDetailById(productId);
+			responseData.put("quantity", orderDetail.getQuantity());
+			responseData.put("amount", orderDetail.getAmount());
+		}
+		return responseData;
+	}
+
+	@RequestMapping(value = "/cart/decreaseQuantity", method = RequestMethod.POST, //
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseStatus(value = HttpStatus.OK)
+	public Map<String, Object> decrease(@RequestParam HashMap<String, String> requestData) {
+		String productId = requestData.get("productId");
+		String command = requestData.get("command");
+		Map<String, Object> responseData = new HashMap<String, Object>();
+		try {
+			if (!productId.equalsIgnoreCase(null) && command.equalsIgnoreCase("decreaseQuantity")) {
+				int result = cart.decreaseQuantity(productId);
+				OrderDetail orderDetail = cart.getOrderDetailById(productId);
+				if (result == 1) {
+					responseData.put("quantity", orderDetail.getQuantity());
+					responseData.put("amount", orderDetail.getAmount());
+				} else {
+					responseData.put("amount", 0);
+					responseData.put("quantity", 0);
+				}
+			}
+		} catch (Exception ex) {
+			LOG.info(ex.getMessage());
+		}
 		return responseData;
 	}
 
@@ -61,7 +101,7 @@ public class ShoppingCartRestController {
 		Map<String, Object> responseData = new HashMap<>();
 		if (!productId.equalsIgnoreCase(null) && command.equalsIgnoreCase("removeProduct")) {
 			cart.removeProduct(productId);
-			responseData.put("counter", "" + cart.getCounter());
+			responseData.put("counter", cart.getCounter());
 		}
 
 		return responseData;
@@ -75,7 +115,7 @@ public class ShoppingCartRestController {
 		String command = requestData.get("command");
 		Map<String, Object> responseData = new HashMap<String, Object>();
 		if (command.equalsIgnoreCase("getTotalAmount")) {
-			responseData.put("totalAmount",  cart.getTotalAmount());
+			responseData.put("totalAmount", cart.getTotalAmount());
 		}
 
 		return responseData;
@@ -89,7 +129,7 @@ public class ShoppingCartRestController {
 		String command = requestData.get("command");
 		Map<String, Object> responseData = new HashMap<>();
 		if (command.equalsIgnoreCase("getShippingFee")) {
-			responseData.put("shippingFee",  123);
+			responseData.put("shippingFee", 123);
 		}
 
 		return responseData;
