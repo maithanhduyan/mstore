@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<!-- Header -->
+    <th:block th:include="layout/_header"></th:block>
+
+<body>
+
+    <!-- Navigation-->
+    <th:block th:include="layout/_navbar"></th:block>
+
+    <!-- Carousel-->
+    <th:block th:include="layout/_carousel"></th:block>
+    
+     <!-- Footer-->
+    <th:block th:include="layout/_footer"></th:block>
+
+
+
+    <div id="back-to-top">
+        <a href="#" class="back-to-top" style="display: none;"><i class="fas fa-arrow-up"></i></a>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script th:src="@{/vendor/jquery.easing/jquery.easing.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/aos/aos.js}"></script>
+    <!-- Core theme JS-->
+    <script th:src="@{/js/scripts.js}"></script>
+    <th:block th:include="layout/_scripts"></th:block>
+    
+</body>
+
+</html>

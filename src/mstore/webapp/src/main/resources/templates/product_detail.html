@@ -1,23 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title></title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
-    <!-- fontawesome -->
-    <link th:href="@{/vendor/font-awesome/css/all.min.css}" rel="stylesheet">
-    <!-- Bootstrap icons-->
-    <link th:href="@{/vendor/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link th:href="@{/css/styles.css}" rel="stylesheet" />
-    <!-- aos -->
-    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet">
-</head>
+<!-- Header -->
+<th:block th:include="layout/_header"></th:block>
 
 <body>
     <!-- Navigation-->

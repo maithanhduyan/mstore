@@ -214,7 +214,7 @@
       },
       success: function (data, textStatus, xhr) {
         if (xhr.status == 200 && textStatus == "success") {
-          console.log(data);
+          //console.log(data);
         }
       },
       complete: function (xhr, textStatus) {},

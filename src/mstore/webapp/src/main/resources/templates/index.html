@@ -26,7 +26,7 @@
                         <!-- <div class="sale-off-badge">Sale <span>-36%</span></div> -->
                         <!-- <div class="new-badge ">New</div> -->
                         <!-- Product image-->
-                        <img class="card-img-top" th:src="${product.imageURL}" th:alt="${product.description}" />
+                        <a href="" th:href="'product/' + ${product.id}"><img class="card-img-top" th:src="${product.imageURL}" th:alt="${product.description}" /></a>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
@@ -82,9 +82,7 @@
     <!-- Core theme JS-->
     <script th:src="@{/js/scripts.js}"></script>
     <th:block th:include="layout/_scripts"></th:block>
-    <script type="text/javascript">
-
-    </script>
+   
 </body>
 
 </html>

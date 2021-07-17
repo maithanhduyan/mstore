@@ -10,6 +10,7 @@ public class AdminSiteUtil {
 
 	@Autowired
 	ShopService shopService;
+	@SuppressWarnings("unused")
 	private String shopName;
 
 	public AdminSiteUtil() {
